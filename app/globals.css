@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Coffee Garden design tokens ─────────────────────────────
+     Afgeleid van het logo-groen (#6B8A67), verdiept met een
+     espresso-donker en een warm papier-wit. */
+  --color-sage-50:  #f4f6f3;
+  --color-sage-100: #e4ebe3;
+  --color-sage-200: #c8d6c6;
+  --color-sage-300: #a3b9a0;
+  --color-sage-400: #7d9979;
+  --color-sage-500: #6B8A67;
+  --color-sage-600: #567050;
+  --color-sage-700: #44593f;
+  --color-sage-800: #344530;
+  --color-sage-900: #253222;
+  --color-sage-950: #141c12;
+
+  --color-paper-50:  #fdfcf9;
+  --color-paper-100: #faf8f2;
+  --color-paper-200: #f3efe5;
+  --color-paper-300: #e9e3d5;
+  --color-paper-400: #d8cfba;
+
+  --color-espresso-300: #b5a794;
+  --color-espresso-400: #8a7a64;
+  --color-espresso-500: #5f5343;
+  --color-espresso-600: #463d31;
+  --color-espresso-700: #322b22;
+  --color-espresso-800: #241f18;
+  --color-espresso-900: #1a1611;
+  --color-espresso-950: #120f0b;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
+
+  --animate-steam: steam 3.2s ease-in-out infinite;
+  --animate-steam-slow: steam 4.1s ease-in-out infinite;
+  --animate-marquee: marquee 36s linear infinite;
+}
+
+:root {
+  --background: #faf8f2;
+  --foreground: #1a1611;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+::selection {
+  background: #6B8A67;
+  color: #faf8f2;
+}
+
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #f3efe5; }
+::-webkit-scrollbar-thumb { background: #a3b9a0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #6B8A67; }
+
+/* ── Papier-grain: subtiele textuur over lichte secties ────── */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.36 0 0 0 0 0.32 0 0 0 0 0.24 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Scroll-reveal (aangestuurd door <Reveal>) ─────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+
+/* Stoom uit de kop — gebruikt op de hero-illustratie */
+@keyframes steam {
+  0%   { transform: translateY(0) scaleX(1);      opacity: 0; }
+  15%  { opacity: 0.9; }
+  60%  { opacity: 0.5; }
+  100% { transform: translateY(-46px) scaleX(0.55); opacity: 0; }
+}
+
+/* Doorlopende menustrook */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Logo-reveal op de hero */
+@keyframes logo-reveal {
+  0%   { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.animate-logo-reveal {
+  animation: logo-reveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Tekende lijn-illustraties: strokes die zichzelf tekenen */
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+.draw-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw-path { stroke-dashoffset: 0; animation: none; }
+  .animate-logo-reveal { animation: none; }
+}
+
+/* ── Typografische accenten ────────────────────────────────── */
+.display-italic {
+  font-style: italic;
+  font-variation-settings: "SOFT" 60, "WONK" 1;
+}
