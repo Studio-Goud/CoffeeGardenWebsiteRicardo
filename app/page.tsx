@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import Logo from "@/components/Logo";
 import RoastScale from "@/components/RoastScale";
 import { ArrowIcon, PinIcon, ClockIcon } from "@/components/Icons";
 import {
@@ -49,8 +50,8 @@ const localProducts = [
 ];
 
 const marqueeItems = [
-  "Specialty koffie",
-  "Vers gebrande bonen",
+  "Vers gebrande koffiebonen",
+  "Workshops & high tea",
   "Thee & matcha",
   "Masala chai",
   "Lokale lekkernijen",
@@ -80,14 +81,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-32 w-full">
           <div className="max-w-3xl">
             <div className="animate-logo-reveal flex items-center gap-4 mb-10">
-              <Image
-                src="/images/logo.png"
-                alt="Coffee Garden logo"
-                width={72}
-                height={72}
-                className="w-16 h-16 md:w-[72px] md:h-[72px] object-contain"
-                priority
-              />
+              <Logo className="w-20 h-20 md:w-24 md:h-24 text-sage-600" />
               <div className="h-px flex-1 max-w-24 bg-espresso-900/20" />
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700">
                 Bergselaan · Rotterdam
@@ -101,7 +95,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg md:text-xl text-espresso-500 leading-relaxed max-w-xl mb-12">
-              Speciaalzaak in specialty koffie, thee, matcha en chai. Kom
+              Speciaalzaak in koffie, thee, matcha en chai. Kom
               proeven, ruiken en kiezen — wij nemen de tijd voor je.
             </p>
 
@@ -162,8 +156,8 @@ export default function HomePage() {
               een <em className="display-italic text-sage-600">kopje</em> koffie
             </h2>
             <p className="text-espresso-500 leading-relaxed mb-5 max-w-md">
-              Wij selecteren met passie de beste specialty koffie van kleine,
-              duurzame boerderijen wereldwijd — van Ethiopische naturals tot
+              Wij selecteren met passie onze koffies van kleine, duurzame
+              boerderijen wereldwijd — van Ethiopische naturals tot
               Colombiaanse washed lots.
             </p>
             <p className="text-espresso-500 leading-relaxed mb-10 max-w-md">
@@ -176,7 +170,7 @@ export default function HomePage() {
               {[
                 { value: "13", label: "Eigen koffies" },
                 { value: "30+", label: "Theevariëteiten" },
-                { value: "100%", label: "Specialty grade" },
+                { value: "7/7", label: "Dagen per week open" },
               ].map((s) => (
                 <div key={s.label}>
                   <dt className="sr-only">{s.label}</dt>

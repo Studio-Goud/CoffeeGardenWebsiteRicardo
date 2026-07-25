@@ -4,26 +4,26 @@ import Reveal from "@/components/Reveal";
 import { ArrowIcon, MailIcon } from "@/components/Icons";
 import {
   CupIllustration,
-  MatchaIllustration,
+  TeaIllustration,
   SteamLines,
 } from "@/components/Illustrations";
 
 export const metadata: Metadata = {
-  title: "Workshops & proeverijen",
+  title: "Workshops & high tea",
   description:
-    "Workshops en proeverijen bij Coffee Garden Rotterdam — leer alles over specialty koffie of de kunst van matcha bereiden. Kleine groepen, persoonlijke begeleiding.",
+    "Workshops bij Coffee Garden Rotterdam — de Koffie Workshop en de Thee Melangeren Workshop in high tea-stijl. Kleine groepen, persoonlijke begeleiding.",
 };
 
 const upcoming = [
   {
-    title: "Specialty koffie proeverij",
-    desc: "Proef het verschil tussen origins, brandingen en zetmethodes. Van Ethiopische naturals tot onze donkerste huisblend.",
+    title: "Koffie Workshop",
+    desc: "Duik in de wereld van koffie: proef het verschil tussen onze origins en huisblends, leer over brandingen en ontdek welke zetmethode bij jou past.",
     Illustration: CupIllustration,
   },
   {
-    title: "De kunst van matcha",
-    desc: "Van chasen tot usucha: leer ceremoniële matcha kloppen zoals het hoort — en proef waarom grade uitmaakt.",
-    Illustration: MatchaIllustration,
+    title: "Thee Melangeren Workshop",
+    desc: "Stel je eigen theemelange samen en geniet ondertussen van lekkers in high tea-stijl. Je gaat naar huis met je eigen blend.",
+    Illustration: TeaIllustration,
   },
 ];
 
@@ -37,11 +37,11 @@ export default function WorkshopsPage() {
           </p>
           <h1 className="font-display text-5xl md:text-7xl tracking-tight text-espresso-900 leading-[0.98] mb-6">
             Workshops &amp;{" "}
-            <em className="display-italic text-sage-600">proeverijen</em>
+            <em className="display-italic text-sage-600">high tea</em>
           </h1>
           <p className="text-espresso-500 leading-relaxed max-w-lg">
-            Kleine groepen, persoonlijke begeleiding en vooral: heel veel
-            proeven. We leggen de laatste hand aan het programma.
+            Twee workshops, kleine groepen, persoonlijke begeleiding en vooral:
+            heel veel proeven. We leggen de laatste hand aan het programma.
           </p>
         </div>
       </section>

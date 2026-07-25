@@ -14,7 +14,7 @@ import { coffees, startingPrice, type Coffee } from "@/lib/products";
 export const metadata: Metadata = {
   title: "Assortiment",
   description:
-    "13 eigen specialty koffies — single origins en huisblends — plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
+    "13 eigen koffies — single origins en huisblends — plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
 };
 
 const inStoreCategories = [

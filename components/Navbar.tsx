@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Logo from "./Logo";
 
 const links = [
   { href: "/assortiment", label: "Assortiment" },
@@ -38,14 +38,7 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 md:h-20">
         <Link href="/" className="flex items-center gap-3 group" aria-label="Coffee Garden — home">
-          <Image
-            src="/images/logo.png"
-            alt=""
-            width={44}
-            height={44}
-            className="w-10 h-10 md:w-11 md:h-11 object-contain transition-transform duration-500 group-hover:rotate-[-6deg]"
-            priority
-          />
+          <Logo className="w-10 h-10 md:w-11 md:h-11 text-sage-600 transition-transform duration-500 group-hover:rotate-[-6deg]" />
           <span className="font-display font-semibold text-lg tracking-tight text-espresso-900">
             Coffee Garden
           </span>

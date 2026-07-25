@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     template: "%s — Coffee Garden Rotterdam",
   },
   description:
-    "Coffee Garden is dé koffie- en theespeciaalzaak aan de Bergselaan in Rotterdam. Specialty koffiebonen, thee, matcha, chai en lokale lekkernijen. Kom proeven.",
+    "Coffee Garden is dé koffie- en theespeciaalzaak aan de Bergselaan in Rotterdam. Koffiebonen, thee, matcha, chai en lokale lekkernijen. Kom proeven.",
   keywords: [
-    "specialty koffie",
+    "koffie",
     "koffiebonen",
     "koffie speciaalzaak",
     "thee",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Coffee Garden — Speciaalzaak in koffie & thee",
     description:
-      "Specialty koffie, thee, matcha en lokale lekkernijen aan de Bergselaan in Rotterdam. Kom proeven.",
+      "Koffie, thee, matcha en lokale lekkernijen aan de Bergselaan in Rotterdam. Kom proeven.",
     locale: "nl_NL",
     type: "website",
     siteName: "Coffee Garden",

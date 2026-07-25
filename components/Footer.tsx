@@ -1,11 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
+import Logo from "./Logo";
 import { PinIcon, ClockIcon, MailIcon, InstagramIcon } from "./Icons";
 import { BranchIllustration } from "./Illustrations";
 
 const nav = [
   { href: "/assortiment", label: "Assortiment" },
-  { href: "/workshops", label: "Workshops & proeverijen" },
+  { href: "/workshops", label: "Workshops & high tea" },
   { href: "/winkel", label: "De winkel" },
 ];
 
@@ -19,21 +19,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3 mb-5">
-              <Image
-                src="/images/logo.png"
-                alt="Coffee Garden logo"
-                width={52}
-                height={52}
-                className="w-13 h-13 object-contain brightness-0 invert opacity-90"
-              />
+            <div className="flex items-center gap-4 mb-5">
+              <Logo className="w-14 h-14 text-paper-200/90" />
               <span className="font-display font-semibold text-2xl text-paper-100">
                 Coffee Garden
               </span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs text-paper-300/80 mb-6">
               Speciaalzaak in koffie &amp; thee aan de Bergselaan in Rotterdam
-              Noord. Specialty bonen, thee, matcha, chai en lokale lekkernijen —
+              Noord. Koffiebonen, thee, matcha, chai en lokale lekkernijen —
               met aandacht geselecteerd.
             </p>
             <a

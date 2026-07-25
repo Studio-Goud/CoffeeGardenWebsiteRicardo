@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "De winkel",
   description:
-    "Bezoek Coffee Garden aan de Bergselaan 291-A in Rotterdam Noord. Dagelijks open, geen reservering nodig. Proef specialty koffie, thee, matcha en chai.",
+    "Bezoek Coffee Garden aan de Bergselaan 291-A in Rotterdam Noord. Dagelijks open, geen reservering nodig. Proef koffie, thee, matcha en chai.",
 };
 
 const MAPS_URL =
