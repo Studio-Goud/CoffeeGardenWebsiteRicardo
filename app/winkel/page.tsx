@@ -26,12 +26,12 @@ const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Coffee+Garden+Bergselaan+291A+Rotterdam";
 
 const hours = [
-  { day: "Maandag", time: "08:00 – 15:00" },
-  { day: "Dinsdag", time: "08:00 – 15:00" },
-  { day: "Woensdag", time: "08:00 – 15:00" },
-  { day: "Donderdag", time: "08:00 – 15:00" },
-  { day: "Vrijdag", time: "08:00 – 15:00" },
-  { day: "Zaterdag", time: "08:00 – 15:00" },
+  { day: "Maandag", time: "08:00 – 16:00" },
+  { day: "Dinsdag", time: "08:00 – 16:00" },
+  { day: "Woensdag", time: "08:00 – 16:00" },
+  { day: "Donderdag", time: "08:00 – 16:00" },
+  { day: "Vrijdag", time: "08:00 – 16:00" },
+  { day: "Zaterdag", time: "10:00 – 17:00" },
   { day: "Zondag", time: "10:00 – 15:00" },
 ];
 

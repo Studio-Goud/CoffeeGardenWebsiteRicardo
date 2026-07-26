@@ -13,7 +13,7 @@ import {
   BeanIllustration,
   SteamLines,
 } from "@/components/Illustrations";
-import { coffees, startingPrice, PRICE_TABLE, WEIGHTS } from "@/lib/products";
+import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES } from "@/lib/products";
 
 const categories = [
   {
@@ -308,10 +308,8 @@ export default function HomePage() {
                     <div className="flex items-center justify-between">
                       <RoastScale roast={coffee.roast} showLabel={false} />
                       <p className="text-sm text-espresso-900">
-                        <span className="text-espresso-400 text-xs">vanaf</span>{" "}
-                        <span className="font-semibold">
-                          €{startingPrice(coffee).toFixed(2).replace(".", ",")}
-                        </span>
+                        <span className="text-espresso-400 text-xs">{BAG_SIZE}</span>{" "}
+                        <span className="font-semibold">€{BAG_PRICE},-</span>
                       </p>
                     </div>
                   </div>
@@ -333,49 +331,38 @@ export default function HomePage() {
               De <em className="display-italic text-sage-600">menukaart</em>
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed max-w-md mx-auto">
-              Zelfde prijzen als op het bord in de winkel. Alle bonen malen we
-              gratis op jouw zetmethode.
+              Elke koffiezak is standaard 500 gram — één vaste prijs voor al
+              onze koffies. Alle bonen malen we gratis op jouw zetmethode.
             </p>
           </Reveal>
 
           <Reveal delay={120}>
             <div className="bg-paper-50 rounded-[2rem] border border-espresso-900/8 p-8 md:p-12 shadow-sm">
-              <div className="grid grid-cols-[1fr_repeat(3,minmax(3.5rem,auto))] gap-x-4 md:gap-x-8 text-sm">
-                <span />
-                {WEIGHTS.map((w) => (
-                  <span
-                    key={w}
-                    className="text-right text-[11px] font-semibold uppercase tracking-[0.15em] text-espresso-400 pb-4"
-                  >
-                    {w}
-                  </span>
-                ))}
-
-                {(
-                  [
-                    ["house-blend", "Huisblends", "Onze eigen espresso-composities"],
-                    ["single-origin", "Single origins", "Pure herkomst, 100% arabica"],
-                    ["bio-single-origin", "Bio single origins", "Biologisch gecertificeerd"],
-                  ] as const
-                ).map(([tier, label, sub], row) => (
-                  <div key={tier} className="contents">
-                    <div className={`py-5 ${row > 0 ? "border-t border-espresso-900/8" : ""}`}>
-                      <p className="font-display text-lg text-espresso-900">{label}</p>
-                      <p className="text-xs text-espresso-400 mt-0.5">{sub}</p>
-                    </div>
-                    {WEIGHTS.map((w) => (
-                      <div
-                        key={w}
-                        className={`py-5 flex items-center justify-end ${row > 0 ? "border-t border-espresso-900/8" : ""}`}
-                      >
-                        <span className="font-medium text-espresso-800 tabular-nums">
-                          €{PRICE_TABLE[tier][w]}
-                        </span>
-                      </div>
-                    ))}
+              {BUNDLES.map((b, row) => (
+                <div
+                  key={b.qty}
+                  className={`flex items-center justify-between gap-6 py-5 ${
+                    row > 0 ? "border-t border-espresso-900/8" : ""
+                  }`}
+                >
+                  <div>
+                    <p className="font-display text-lg text-espresso-900">
+                      {b.label}
+                    </p>
+                    <p className="text-xs text-espresso-400 mt-0.5">
+                      {b.qty} × 500 gram
+                      {b.qty * BAG_PRICE > b.price &&
+                        ` — je bespaart €${b.qty * BAG_PRICE - b.price},-`}
+                    </p>
                   </div>
-                ))}
-              </div>
+                  <span className="font-display text-2xl md:text-3xl text-espresso-900 tabular-nums">
+                    €{b.price},-
+                  </span>
+                </div>
+              ))}
+              <p className="pt-5 border-t border-espresso-900/8 text-xs text-espresso-400 text-center">
+                Alle koffiezakken zijn af te halen in de winkel.
+              </p>
             </div>
           </Reveal>
         </div>
@@ -462,8 +449,12 @@ export default function HomePage() {
                 <ClockIcon className="w-5 h-5 text-sage-300 shrink-0 mt-0.5" />
                 <div className="text-sage-200/90 space-y-0.5">
                   <p className="flex justify-between gap-8">
-                    <span>Ma – za</span>
-                    <span className="tabular-nums">08:00 – 15:00</span>
+                    <span>Ma – vrij</span>
+                    <span className="tabular-nums">08:00 – 16:00</span>
+                  </p>
+                  <p className="flex justify-between gap-8">
+                    <span>Zaterdag</span>
+                    <span className="tabular-nums">10:00 – 17:00</span>
                   </p>
                   <p className="flex justify-between gap-8">
                     <span>Zondag</span>
