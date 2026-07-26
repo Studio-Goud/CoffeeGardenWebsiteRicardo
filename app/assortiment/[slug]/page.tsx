@@ -87,7 +87,7 @@ export default async function CoffeeDetailPage({
                   </span>
                 )}
                 {coffee.huisblend && (
-                  <span className="px-3.5 py-1.5 bg-espresso-900/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
+                  <span className="px-3.5 py-1.5 bg-sage-800/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
                     Huisblend
                   </span>
                 )}
@@ -149,7 +149,7 @@ export default async function CoffeeDetailPage({
 
             <Link
               href="/winkel"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-espresso-900 text-paper-100 font-medium rounded-full hover:bg-sage-700 transition-colors duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
             >
               <PinIcon className="w-4.5 h-4.5" />
               Verkrijgbaar in de winkel

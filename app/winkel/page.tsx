@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import {
   PinIcon,
@@ -9,12 +10,7 @@ import {
   CarIcon,
   ArrowIcon,
 } from "@/components/Icons";
-import {
-  CupIllustration,
-  TeaIllustration,
-  BranchIllustration,
-  SteamLines,
-} from "@/components/Illustrations";
+import { BranchIllustration } from "@/components/Illustrations";
 
 export const metadata: Metadata = {
   title: "De winkel",
@@ -190,11 +186,24 @@ export default function WinkelPage() {
         {/* Rechter kolom */}
         <div className="md:col-span-5">
           <Reveal delay={100}>
-            <div className="relative mb-10">
-              <SteamLines className="absolute -top-8 left-10 w-14 text-sage-400" />
-              <div className="aspect-[4/3] rounded-3xl bg-sage-100 border border-sage-200/60 flex items-center justify-center gap-6 overflow-hidden">
-                <CupIllustration draw className="w-32 text-sage-700" />
-                <TeaIllustration draw className="w-24 text-sage-600" />
+            <div className="rounded-3xl overflow-hidden border border-espresso-900/8 bg-paper-50 mb-10">
+              <div className="aspect-[4/3] bg-paper-200 overflow-hidden">
+                <Image
+                  src="/images/spaarkaart.jpg"
+                  alt="De spaarkaart van Coffee Garden op een houten bank"
+                  width={1080}
+                  height={1400}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h2 className="font-display text-lg text-espresso-900 mb-1.5">
+                  Vraag om de spaarkaart
+                </h2>
+                <p className="text-sm text-espresso-500 leading-relaxed">
+                  Bij elke koffie of thee zetten we een stempel. 5 stempels =
+                  50% korting, 10 stempels = een gratis koffie of thee.
+                </p>
               </div>
             </div>
           </Reveal>

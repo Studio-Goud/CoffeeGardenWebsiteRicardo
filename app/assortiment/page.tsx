@@ -98,7 +98,7 @@ async function AssortimentContent({
               </div>
               <Link
                 href="/winkel"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-espresso-900 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-700 transition-colors shrink-0"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors shrink-0"
               >
                 <PinIcon className="w-4 h-4" />
                 Winkel-info
@@ -122,7 +122,7 @@ async function AssortimentContent({
         title="Onze huiscomposities"
         subtitle={`${blends.length} blends · van zacht tot intens`}
         coffees={blends}
-        dark
+        tinted
       />
 
       {/* In de winkel */}
@@ -162,39 +162,29 @@ function CoffeeSection({
   title,
   subtitle,
   coffees,
-  dark,
+  tinted,
 }: {
   eyebrow: string;
   title: string;
   subtitle: string;
   coffees: Coffee[];
-  dark?: boolean;
+  tinted?: boolean;
 }) {
   return (
     <section
-      className={`py-24 md:py-32 px-5 sm:px-8 ${dark ? "bg-espresso-900" : ""}`}
+      className={`py-24 md:py-32 px-5 sm:px-8 ${tinted ? "grain bg-sage-100/60" : ""}`}
     >
       <div className="max-w-6xl mx-auto">
         <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p
-              className={`text-[11px] font-semibold uppercase tracking-[0.25em] mb-3 ${
-                dark ? "text-sage-400" : "text-sage-700"
-              }`}
-            >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] mb-3 text-sage-700">
               {eyebrow}
             </p>
-            <h2
-              className={`font-display text-3xl md:text-4xl tracking-tight ${
-                dark ? "text-paper-100" : "text-espresso-900"
-              }`}
-            >
+            <h2 className="font-display text-3xl md:text-4xl tracking-tight text-espresso-900">
               {title}
             </h2>
           </div>
-          <p className={`text-sm ${dark ? "text-paper-300/50" : "text-espresso-400"}`}>
-            {subtitle}
-          </p>
+          <p className="text-sm text-espresso-400">{subtitle}</p>
         </Reveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -202,11 +192,7 @@ function CoffeeSection({
             <Reveal key={c.slug} delay={(i % 4) * 90}>
               <Link
                 href={`/assortiment/${c.slug}`}
-                className={`group block h-full rounded-3xl overflow-hidden border transition-all duration-500 ${
-                  dark
-                    ? "bg-espresso-800/70 border-paper-100/8 hover:border-sage-500/50"
-                    : "bg-paper-50 border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5"
-                }`}
+                className="group block h-full rounded-3xl overflow-hidden border transition-all duration-500 bg-paper-50 border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5"
               >
                 <div className="relative aspect-square bg-paper-200 overflow-hidden">
                   <Image
@@ -223,50 +209,28 @@ function CoffeeSection({
                       </span>
                     )}
                     {c.huisblend && (
-                      <span className="px-3 py-1 bg-espresso-900/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
+                      <span className="px-3 py-1 bg-sage-800/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
                         Huisblend
                       </span>
                     )}
                   </div>
                 </div>
                 <div className="p-5">
-                  <p
-                    className={`text-[10px] font-semibold uppercase tracking-[0.15em] mb-1.5 ${
-                      dark ? "text-sage-400" : "text-sage-700"
-                    }`}
-                  >
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.15em] mb-1.5 text-sage-700">
                     {c.origin}
                   </p>
-                  <h3
-                    className={`font-display text-xl leading-tight mb-1.5 transition-colors ${
-                      dark
-                        ? "text-paper-100 group-hover:text-sage-300"
-                        : "text-espresso-900 group-hover:text-sage-700"
-                    }`}
-                  >
+                  <h3 className="font-display text-xl leading-tight mb-1.5 transition-colors text-espresso-900 group-hover:text-sage-700">
                     {c.name}
                   </h3>
-                  <p
-                    className={`text-xs mb-4 ${dark ? "text-paper-300/50" : "text-espresso-400"}`}
-                  >
+                  <p className="text-xs mb-4 text-espresso-400">
                     {c.notes.join(" · ")}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span
-                      className={`text-sm ${dark ? "text-paper-100" : "text-espresso-900"}`}
-                    >
-                      <span
-                        className={`text-xs ${dark ? "text-paper-300/50" : "text-espresso-400"}`}
-                      >
-                        {BAG_SIZE}
-                      </span>{" "}
+                    <span className="text-sm text-espresso-900">
+                      <span className="text-xs text-espresso-400">{BAG_SIZE}</span>{" "}
                       <span className="font-semibold">€{BAG_PRICE},-</span>
                     </span>
-                    <ArrowIcon
-                      className={`w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 ${
-                        dark ? "text-sage-400" : "text-sage-600"
-                      }`}
-                    />
+                    <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-sage-600" />
                   </div>
                 </div>
               </Link>
