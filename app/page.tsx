@@ -68,16 +68,6 @@ export default function HomePage() {
     <>
       {/* ─── Hero ─────────────────────────────────────────────── */}
       <section className="grain relative min-h-svh flex items-center bg-paper-100 overflow-hidden">
-        {/* Decoratieve takken in de hoeken */}
-        <BranchIllustration
-          draw
-          className="absolute -left-16 top-28 w-64 md:w-80 text-sage-300/70 pointer-events-none select-none -scale-x-100"
-        />
-        <BranchIllustration
-          draw
-          className="absolute -right-16 bottom-16 w-64 md:w-96 text-sage-300/70 pointer-events-none select-none"
-        />
-
         <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-32 w-full">
           <div className="max-w-3xl">
             <div className="animate-logo-reveal flex items-center gap-4 mb-10">
