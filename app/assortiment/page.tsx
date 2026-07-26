@@ -9,7 +9,7 @@ import {
   MatchaIllustration,
   ChaiIllustration,
 } from "@/components/Illustrations";
-import { coffees, startingPrice, type Coffee } from "@/lib/products";
+import { coffees, BAG_PRICE, BAG_SIZE, type Coffee } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Assortiment",
@@ -258,11 +258,9 @@ function CoffeeSection({
                       <span
                         className={`text-xs ${dark ? "text-paper-300/50" : "text-espresso-400"}`}
                       >
-                        vanaf
+                        {BAG_SIZE}
                       </span>{" "}
-                      <span className="font-semibold">
-                        €{startingPrice(c).toFixed(2).replace(".", ",")}
-                      </span>
+                      <span className="font-semibold">€{BAG_PRICE},-</span>
                     </span>
                     <ArrowIcon
                       className={`w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 ${

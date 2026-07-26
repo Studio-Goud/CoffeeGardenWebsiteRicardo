@@ -9,38 +9,24 @@
  * Migratie: zodra producten in Shopify staan, vervang `getCoffees()` door
  * `getAllProducts()` uit lib/shopify.ts en match op handle (slug).
  *
- * Prijzen volgen het tier-systeem uit de winkel: alle huisblends hebben
- * dezelfde prijs, alle single origins dezelfde, BIO een tier hoger.
- * Zo verander je een tarief op één plek (PRICE_TABLE) ipv 13 keer.
+ * Prijzen zijn bewust simpel: elke koffiezak is standaard 500 gram en kost
+ * €15, ongeacht welke koffie. Meerdere zakken zijn voordeliger (2 voor €28,
+ * 3 voor €38). Alles is uitsluitend af te halen in de winkel.
  */
 
 export type RoastLevel = "light" | "medium" | "medium-dark" | "dark";
 export type CoffeeType = "single-origin" | "espresso-blend";
-export type PriceTier =
-  | "house-blend"
-  | "single-origin"
-  | "bio-single-origin";
-export type Weight = "250g" | "500g" | "750g";
 
-/** Prijzen in euro's (zelfde tabel als op het bord in de winkel). */
-export const PRICE_TABLE: Record<PriceTier, Record<Weight, number>> = {
-  "house-blend": { "250g": 11, "500g": 20, "750g": 28 },
-  "single-origin": { "250g": 14, "500g": 25, "750g": 35 },
-  "bio-single-origin": { "250g": 17, "500g": 31, "750g": 43 },
-};
+/** Standaard zakgrootte en prijs — geldt voor álle koffies. */
+export const BAG_SIZE = "500 gr";
+export const BAG_PRICE = 15;
 
-export const WEIGHTS: Weight[] = ["250g", "500g", "750g"];
-export const DEFAULT_WEIGHT: Weight = "500g";
-
-const TIER_LABEL: Record<PriceTier, string> = {
-  "house-blend": "Huisblend",
-  "single-origin": "Single Origin",
-  "bio-single-origin": "BIO · Single Origin",
-};
-
-export function priceTierLabel(t: PriceTier): string {
-  return TIER_LABEL[t];
-}
+/** Staffelprijzen in euro's (zelfde als op het bord in de winkel). */
+export const BUNDLES = [
+  { qty: 1, label: "1 zak", price: 15 },
+  { qty: 2, label: "2 zakken", price: 28 },
+  { qty: 3, label: "3 zakken", price: 38 },
+] as const;
 
 export interface Coffee {
   slug: string;
@@ -67,8 +53,6 @@ export interface Coffee {
   thumb: string;
   bio?: boolean;
   huisblend?: boolean;
-  /** Prijscategorie — bepaalt prijs per gewicht via PRICE_TABLE. */
-  priceTier: PriceTier;
 }
 
 const NL_ROAST: Record<RoastLevel, string> = {
@@ -82,13 +66,11 @@ export function roastLabel(r: RoastLevel): string {
   return NL_ROAST[r];
 }
 
-export function priceFor(coffee: Coffee, weight: Weight): number {
-  return PRICE_TABLE[coffee.priceTier][weight];
-}
-
-/** Laagste prijs (= 250g) — voor "vanaf €X" labels in de productlijst. */
-export function startingPrice(coffee: Coffee): number {
-  return PRICE_TABLE[coffee.priceTier]["250g"];
+/** Categorie-label voor de detailpagina, bv. "BIO · Single Origin". */
+export function categoryLabel(coffee: Coffee): string {
+  if (coffee.bio) return "BIO · Single Origin";
+  if (coffee.type === "single-origin") return "Single Origin";
+  return "Huisblend";
 }
 
 export const coffees: Coffee[] = [
@@ -108,7 +90,6 @@ export const coffees: Coffee[] = [
     brewing: "Perfect als filter (V60, Chemex) of als single-origin espresso.",
     image: "/products/ethiopia-yirgacheffe.png",
     thumb: "/products/ethiopia-yirgacheffe-thumb.png",
-    priceTier: "single-origin",
   },
   {
     slug: "colombia-supremo",
@@ -125,7 +106,6 @@ export const coffees: Coffee[] = [
     brewing: "Sterke allrounder — filter, French press of espresso.",
     image: "/products/colombia-supremo.png",
     thumb: "/products/colombia-supremo-thumb.png",
-    priceTier: "single-origin",
   },
   {
     slug: "peru-cajamarca",
@@ -143,7 +123,6 @@ export const coffees: Coffee[] = [
     image: "/products/peru-cajamarca.png",
     thumb: "/products/peru-cajamarca-thumb.png",
     bio: true,
-    priceTier: "bio-single-origin",
   },
   {
     slug: "casa-del-pueblo",
@@ -161,7 +140,6 @@ export const coffees: Coffee[] = [
     image: "/products/casa-del-pueblo.png",
     thumb: "/products/casa-del-pueblo-thumb.png",
     bio: true,
-    priceTier: "bio-single-origin",
   },
   {
     slug: "brasil-cerrado",
@@ -178,10 +156,9 @@ export const coffees: Coffee[] = [
     brewing: "Onze go-to als espresso-basis voor melk-drinks.",
     image: "/products/brasil-cerrado.png",
     thumb: "/products/brasil-cerrado-thumb.png",
-    priceTier: "single-origin",
   },
 
-  // ─── Espresso Blends (Huisblend-tarief) ────────────────────────────────
+  // ─── Espresso Blends ───────────────────────────────────────────────────
   {
     slug: "fleur-de-miel",
     name: "Fleur de Miel",
@@ -197,7 +174,6 @@ export const coffees: Coffee[] = [
     image: "/products/fleur-de-miel.png",
     thumb: "/products/fleur-de-miel-thumb.png",
     huisblend: true,
-    priceTier: "house-blend",
   },
   {
     slug: "prima-luce",
@@ -212,7 +188,6 @@ export const coffees: Coffee[] = [
     brewing: "Cortado of flat white — de citrus blijft mooi staan.",
     image: "/products/prima-luce.png",
     thumb: "/products/prima-luce-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "lessentiel",
@@ -227,7 +202,6 @@ export const coffees: Coffee[] = [
     brewing: "Klassieke espresso of latte.",
     image: "/products/lessentiel.png",
     thumb: "/products/lessentiel-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "reserve-noire",
@@ -242,7 +216,6 @@ export const coffees: Coffee[] = [
     brewing: "Espresso, ristretto of moka pot.",
     image: "/products/reserve-noire.png",
     thumb: "/products/reserve-noire-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "velours",
@@ -257,7 +230,6 @@ export const coffees: Coffee[] = [
     brewing: "Espresso met dichte crema, ook prachtig in een macchiato.",
     image: "/products/velours.png",
     thumb: "/products/velours-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "magnifico",
@@ -272,7 +244,6 @@ export const coffees: Coffee[] = [
     brewing: "Cappuccino of caffè latte — de hazelnoot bindt prachtig met melk.",
     image: "/products/magnifico.png",
     thumb: "/products/magnifico-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "domaine",
@@ -287,7 +258,6 @@ export const coffees: Coffee[] = [
     brewing: "Espresso of als basis voor een sterke cortado.",
     image: "/products/domaine.png",
     thumb: "/products/domaine-thumb.png",
-    priceTier: "house-blend",
   },
   {
     slug: "bellissimo",
@@ -302,7 +272,6 @@ export const coffees: Coffee[] = [
     brewing: "Pure espresso of ristretto, geen melk nodig.",
     image: "/products/bellissimo.png",
     thumb: "/products/bellissimo-thumb.png",
-    priceTier: "house-blend",
   },
 ];
 

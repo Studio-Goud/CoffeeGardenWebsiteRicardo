@@ -9,10 +9,10 @@ import { SteamLines } from "@/components/Illustrations";
 import {
   coffees,
   getCoffeeBySlug,
-  priceFor,
-  priceTierLabel,
-  WEIGHTS,
-  startingPrice,
+  categoryLabel,
+  BAG_PRICE,
+  BAG_SIZE,
+  BUNDLES,
 } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -52,7 +52,8 @@ export default async function CoffeeDetailPage({
     ...(coffee.process ? ([["Verwerking", coffee.process]] as Array<[string, string]>) : []),
     ...(coffee.altitude ? ([["Hoogte", coffee.altitude]] as Array<[string, string]>) : []),
     ["Bonen", coffee.beans],
-    ["Categorie", priceTierLabel(coffee.priceTier)],
+    ["Categorie", categoryLabel(coffee)],
+    ["Inhoud", "500 gram"],
   ];
 
   return (
@@ -128,20 +129,21 @@ export default async function CoffeeDetailPage({
             {/* Prijzen */}
             <div className="bg-paper-50 rounded-3xl border border-espresso-900/8 p-7 mb-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-espresso-400 mb-5">
-                Prijzen — {priceTierLabel(coffee.priceTier)}
+                Prijzen — zakken van 500 gram
               </p>
               <div className="grid grid-cols-3 divide-x divide-espresso-900/8">
-                {WEIGHTS.map((w) => (
-                  <div key={w} className="text-center px-2">
+                {BUNDLES.map((b) => (
+                  <div key={b.qty} className="text-center px-2">
                     <p className="font-display text-2xl md:text-3xl text-espresso-900 tabular-nums">
-                      €{priceFor(coffee, w)}
+                      €{b.price},-
                     </p>
-                    <p className="text-xs text-espresso-400 mt-1">{w}</p>
+                    <p className="text-xs text-espresso-400 mt-1">{b.label}</p>
                   </div>
                 ))}
               </div>
               <p className="text-xs text-espresso-400 mt-5 text-center">
-                Gratis gemalen op jouw zetmethode — of als hele boon mee naar huis.
+                Af te halen in de winkel — gratis gemalen op jouw zetmethode, of
+                als hele boon mee naar huis.
               </p>
             </div>
 
@@ -199,10 +201,8 @@ export default async function CoffeeDetailPage({
                         {c.notes.join(" · ")}
                       </p>
                       <p className="text-sm text-espresso-800 mt-1.5">
-                        <span className="text-xs text-espresso-400">vanaf</span>{" "}
-                        <span className="font-semibold">
-                          €{startingPrice(c).toFixed(2).replace(".", ",")}
-                        </span>
+                        <span className="text-xs text-espresso-400">{BAG_SIZE}</span>{" "}
+                        <span className="font-semibold">€{BAG_PRICE},-</span>
                       </p>
                     </div>
                   </Link>
