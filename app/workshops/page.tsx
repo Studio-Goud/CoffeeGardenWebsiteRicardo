@@ -68,13 +68,13 @@ export default function WorkshopsPage() {
           </div>
 
           <Reveal delay={100}>
-            <div className="relative rounded-[2rem] bg-espresso-900 p-10 md:p-14 overflow-hidden">
-              <SteamLines className="absolute top-8 right-10 w-16 text-sage-600/60" />
-              <h2 className="font-display text-3xl md:text-4xl text-paper-100 mb-4 max-w-md">
+            <div className="relative rounded-[2rem] bg-sage-100/70 border border-sage-200 p-10 md:p-14 overflow-hidden">
+              <SteamLines className="absolute top-8 right-10 w-16 text-sage-400/70" />
+              <h2 className="font-display text-3xl md:text-4xl text-espresso-900 mb-4 max-w-md">
                 Als eerste weten wanneer we{" "}
-                <em className="display-italic text-sage-400">starten</em>?
+                <em className="display-italic text-sage-600">starten</em>?
               </h2>
-              <p className="text-paper-300/70 text-sm leading-relaxed max-w-md mb-8">
+              <p className="text-espresso-500 text-sm leading-relaxed max-w-md mb-8">
                 Stuur een mailtje en we zetten je op de lijst — of kom langs in
                 de winkel, dan vertellen we je alles onder het genot van een
                 kopje.
@@ -82,14 +82,14 @@ export default function WorkshopsPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="mailto:info@coffeegarden.nl?subject=Interesse%20in%20workshops"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 bg-paper-100 text-espresso-900 text-sm font-medium rounded-full hover:bg-sage-200 transition-colors duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
                 >
                   <MailIcon className="w-4.5 h-4.5" />
                   Houd mij op de hoogte
                 </a>
                 <Link
                   href="/winkel"
-                  className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 border border-paper-100/25 text-paper-100 text-sm font-medium rounded-full hover:border-sage-400 hover:text-sage-300 transition-colors duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3.5 border border-espresso-900/25 text-espresso-800 text-sm font-medium rounded-full hover:border-sage-600 hover:text-sage-700 transition-colors duration-300"
                 >
                   Bezoek de winkel
                   <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

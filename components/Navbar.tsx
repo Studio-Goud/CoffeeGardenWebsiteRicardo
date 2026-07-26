@@ -67,7 +67,7 @@ export default function Navbar() {
           })}
           <Link
             href="/winkel"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-espresso-900 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-700 transition-colors duration-300"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
           >
             Kom proeven
           </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
           ))}
           <Link
             href="/winkel"
-            className="mt-2 mb-2 inline-flex self-start items-center gap-2 px-5 py-2.5 bg-espresso-900 text-paper-100 text-sm font-medium rounded-full"
+            className="mt-2 mb-2 inline-flex self-start items-center gap-2 px-5 py-2.5 bg-sage-700 text-paper-100 text-sm font-medium rounded-full"
           >
             Kom proeven
           </Link>
