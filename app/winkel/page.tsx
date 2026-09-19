@@ -27,7 +27,7 @@ const hours = [
   { day: "Woensdag", time: "08:00 – 16:00" },
   { day: "Donderdag", time: "08:00 – 16:00" },
   { day: "Vrijdag", time: "08:00 – 16:00" },
-  { day: "Zaterdag", time: "10:00 – 17:00" },
+  { day: "Zaterdag", time: "09:00 – 16:00" },
   { day: "Zondag", time: "10:00 – 15:00" },
 ];
 

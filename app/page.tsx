@@ -501,7 +501,7 @@ export default function HomePage() {
                   </p>
                   <p className="flex justify-between gap-8">
                     <span>Zaterdag</span>
-                    <span className="tabular-nums">10:00 – 17:00</span>
+                    <span className="tabular-nums">09:00 – 16:00</span>
                   </p>
                   <p className="flex justify-between gap-8">
                     <span>Zondag</span>

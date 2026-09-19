@@ -77,7 +77,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <ClockIcon className="w-4.5 h-4.5 shrink-0 mt-0.5 text-sage-400" />
                 <span>
-                  Ma–vrij 08:00–16:00 · Za 10:00–17:00 · Zo 10:00–15:00
+                  Ma–vrij 08:00–16:00 · Za 09:00–16:00 · Zo 10:00–15:00
                   <br />
                   <span className="text-paper-300/50">Daarna op afspraak</span>
                 </span>
