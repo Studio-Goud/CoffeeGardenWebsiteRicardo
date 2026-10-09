@@ -148,3 +148,20 @@ export function SteamLines({ className }: IllustrationProps) {
     </svg>
   );
 }
+
+/** Handgetekend onderstreep-krabbeltje — voor vrolijke accenten onder koppen. */
+export function Squiggle({ className }: IllustrationProps) {
+  return (
+    <svg
+      viewBox="0 0 120 12"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3.5"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      <path d="M3 8.5c10-6 18 4.5 28-2s18 4.5 28-2 18 4.5 28-2 18 4.5 30-2" />
+    </svg>
+  );
+}

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import Logo from "@/components/Logo";
 import RoastScale from "@/components/RoastScale";
-import { ArrowIcon, PinIcon, ClockIcon } from "@/components/Icons";
+import { ArrowIcon, PinIcon, ClockIcon, SparkIcon } from "@/components/Icons";
 import {
   CupIllustration,
   TeaIllustration,
@@ -11,6 +11,7 @@ import {
   ChaiIllustration,
   BranchIllustration,
   BeanIllustration,
+  Squiggle,
 } from "@/components/Illustrations";
 import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES } from "@/lib/products";
 
@@ -67,8 +68,8 @@ export default function HomePage() {
     <>
       {/* ─── Hero ─────────────────────────────────────────────── */}
       <section className="grain relative min-h-svh flex items-center bg-paper-100 overflow-hidden">
-        <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-32 w-full">
-          <div className="max-w-3xl">
+        <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-32 w-full grid md:grid-cols-12 gap-12 items-center">
+          <div className="md:col-span-7 max-w-3xl">
             <div className="animate-logo-reveal flex items-center gap-4 mb-10">
               <Logo className="w-20 h-20 md:w-24 md:h-24 text-sage-600" />
               <div className="h-px flex-1 max-w-24 bg-espresso-900/20" />
@@ -105,6 +106,44 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+
+          {/* Polaroid-collage — een beetje scheef, zoals op de koelkast thuis */}
+          <div className="hidden md:block md:col-span-5 relative h-[460px] select-none">
+            <figure className="absolute left-0 top-4 w-64 bg-white p-3 pb-3 rounded-xl shadow-xl shadow-espresso-900/15 -rotate-[4deg]">
+              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-20 h-5 bg-clay-200/80 rotate-[2deg] rounded-[2px]" />
+              <div className="rounded-lg overflow-hidden bg-paper-200">
+                <Image
+                  src="/images/interieur.jpg"
+                  alt="Het interieur van Coffee Garden"
+                  width={600}
+                  height={720}
+                  className="w-full object-cover aspect-[5/6]"
+                  priority
+                />
+              </div>
+              <figcaption className="pt-2.5 text-center text-sm font-display italic text-espresso-500">
+                ons groene hoekje
+              </figcaption>
+            </figure>
+            <figure className="absolute right-0 bottom-0 w-56 bg-white p-3 pb-3 rounded-xl shadow-xl shadow-espresso-900/15 rotate-[5deg]">
+              <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 bg-sage-200/90 -rotate-[3deg] rounded-[2px]" />
+              <div className="rounded-lg overflow-hidden bg-paper-200">
+                <Image
+                  src="/images/matcha-moment.jpg"
+                  alt="Iced matcha aan de plantenwand"
+                  width={600}
+                  height={720}
+                  className="w-full object-cover aspect-[5/6]"
+                />
+              </div>
+              <figcaption className="pt-2.5 text-center text-sm font-display italic text-espresso-500">
+                iced matcha!
+              </figcaption>
+            </figure>
+            <span className="absolute -left-6 bottom-16 rotate-[-8deg] inline-flex items-center justify-center w-24 h-24 rounded-full bg-clay-500 text-paper-50 text-center text-[11px] font-semibold uppercase tracking-wider leading-tight shadow-lg shadow-clay-600/30">
+              vers<br />gebrand
+            </span>
+          </div>
         </div>
 
         {/* Scroll-hint */}
@@ -114,21 +153,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Marquee ──────────────────────────────────────────── */}
-      <section className="bg-sage-700 py-5 overflow-hidden" aria-hidden>
-        <div className="flex w-max animate-marquee">
-          {[0, 1].map((copy) => (
-            <div key={copy} className="flex shrink-0 items-center">
-              {marqueeItems.map((item) => (
-                <span key={`${copy}-${item}`} className="flex items-center gap-8 pr-8">
-                  <span className="font-display text-lg md:text-xl text-paper-100 whitespace-nowrap">
-                    {item}
+      {/* ─── Marquee — als een schuin geplakte sticker-tape ───── */}
+      <section className="overflow-hidden py-4 -my-2" aria-hidden>
+        <div className="bg-sage-700 py-5 -rotate-[1.2deg] scale-x-[1.03]">
+          <div className="flex w-max animate-marquee">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 items-center">
+                {marqueeItems.map((item, i) => (
+                  <span key={`${copy}-${item}`} className="flex items-center gap-8 pr-8">
+                    <span className="font-display text-lg md:text-xl text-paper-100 whitespace-nowrap">
+                      {item}
+                    </span>
+                    {i % 2 === 0 ? (
+                      <BeanIllustration className="w-4 h-4 text-sage-300 shrink-0" />
+                    ) : (
+                      <SparkIcon className="w-4 h-4 text-clay-200 shrink-0" />
+                    )}
                   </span>
-                  <BeanIllustration className="w-4 h-4 text-sage-300 shrink-0" />
-                </span>
-              ))}
-            </div>
-          ))}
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -139,11 +184,12 @@ export default function HomePage() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-5">
               Ons verhaal
             </p>
-            <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-espresso-900 mb-7">
+            <h2 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-espresso-900 mb-3">
               Meer dan
               <br />
               een <em className="display-italic text-sage-600">kopje</em> koffie
             </h2>
+            <Squiggle className="w-28 text-clay-400 mb-6" />
             <p className="text-espresso-500 leading-relaxed mb-5 max-w-md">
               Wij selecteren met passie onze koffies van kleine, duurzame
               boerderijen wereldwijd — van Ethiopische naturals tot
@@ -173,17 +219,20 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={150} className="md:col-span-6 relative">
-            <div className="relative mx-auto max-w-md">
-              <div className="aspect-[4/5] rounded-[2rem] bg-sage-100 border border-sage-200/60 overflow-hidden">
-                <Image
-                  src="/images/interieur.jpg"
-                  alt="Het interieur van Coffee Garden — lichte houten tafels, planten en veel daglicht"
-                  width={1303}
-                  height={1600}
-                  className="w-full h-full object-cover"
-                />
+            <div className="relative mx-auto max-w-md rotate-[1.5deg]">
+              <span className="absolute -top-3 left-10 w-24 h-6 bg-sage-200/90 -rotate-[4deg] rounded-[2px] z-10" />
+              <div className="aspect-[4/5] rounded-[2rem] bg-white p-3 shadow-xl shadow-espresso-900/10">
+                <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-sage-100">
+                  <Image
+                    src="/images/interieur.jpg"
+                    alt="Het interieur van Coffee Garden — lichte houten tafels, planten en veel daglicht"
+                    width={1303}
+                    height={1600}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-              <div className="absolute -bottom-5 -right-3 md:-right-8 bg-sage-700 text-paper-100 rounded-2xl px-6 py-5 shadow-xl shadow-sage-900/20">
+              <div className="absolute -bottom-5 -right-3 md:-right-8 bg-sage-700 text-paper-100 rounded-2xl px-6 py-5 shadow-xl shadow-sage-900/20 -rotate-[2deg]">
                 <p className="font-display text-lg">Bergselaan 291-A</p>
                 <p className="text-paper-100/70 text-sm mt-0.5">
                   Rotterdam Noord · Dagelijks open
@@ -220,9 +269,11 @@ export default function HomePage() {
               <Reveal key={cat.title} delay={i * 100}>
                 <Link
                   href={cat.href}
-                  className="group block h-full p-8 rounded-3xl bg-paper-50 border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 transition-all duration-500"
+                  className={`group block h-full p-8 rounded-3xl border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 hover:-translate-y-1.5 transition-all duration-500 ${
+                    ["bg-paper-50", "bg-sage-50", "bg-clay-100/60", "bg-paper-50"][i]
+                  } ${i % 2 === 0 ? "lg:-rotate-[0.8deg]" : "lg:rotate-[0.8deg]"} hover:rotate-0`}
                 >
-                  <cat.Illustration className="w-20 h-20 mb-7 text-sage-600 transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:text-sage-500" />
+                  <cat.Illustration className="w-20 h-20 mb-7 text-sage-600 transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:-rotate-6 group-hover:text-sage-500" />
                   <h3 className="font-display text-2xl text-espresso-900 mb-2.5">
                     {cat.title}
                   </h3>
@@ -277,7 +328,7 @@ export default function HomePage() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
                     {coffee.huisblend && (
-                      <span className="absolute top-4 left-4 px-3 py-1.5 bg-sage-800/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
+                      <span className="absolute top-4 left-4 px-3 py-1.5 bg-clay-500/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
                         Huisblend
                       </span>
                     )}
@@ -329,7 +380,10 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="bg-paper-50 rounded-[2rem] border border-espresso-900/8 p-8 md:p-12 shadow-sm">
+            <div className="relative bg-paper-50 rounded-[2rem] border border-espresso-900/8 p-8 md:p-12 shadow-sm rotate-[0.5deg]">
+              <span className="absolute -top-5 -right-2 md:-right-5 rotate-[7deg] inline-flex items-center justify-center w-21 h-21 md:w-24 md:h-24 rounded-full bg-clay-500 text-paper-50 text-center text-[10px] md:text-[11px] font-semibold uppercase tracking-wider leading-tight shadow-lg shadow-clay-600/30">
+                bundel-<br />voordeel!
+              </span>
               {BUNDLES.map((b, row) => (
                 <div
                   key={b.qty}
@@ -343,8 +397,11 @@ export default function HomePage() {
                     </p>
                     <p className="text-xs text-espresso-400 mt-0.5">
                       {b.qty} × 500 gram
-                      {b.qty * BAG_PRICE > b.price &&
-                        ` — je bespaart €${b.qty * BAG_PRICE - b.price},-`}
+                      {b.qty * BAG_PRICE > b.price && (
+                        <span className="text-clay-600 font-medium">
+                          {` — je bespaart €${b.qty * BAG_PRICE - b.price},-`}
+                        </span>
+                      )}
                     </p>
                   </div>
                   <span className="font-display text-2xl md:text-3xl text-espresso-900 tabular-nums">
@@ -383,7 +440,11 @@ export default function HomePage() {
             {localProducts.map((p, i) => (
               <Reveal key={p.name} delay={i * 100}>
                 <div className="group">
-                  <div className="aspect-square rounded-3xl overflow-hidden bg-paper-200 border border-espresso-900/8 mb-4">
+                  <div
+                    className={`aspect-square rounded-3xl overflow-hidden bg-paper-200 border border-espresso-900/8 mb-4 transition-transform duration-500 group-hover:rotate-0 ${
+                      ["-rotate-[1.5deg]", "rotate-[1deg]", "-rotate-[1deg]", "rotate-[1.5deg]"][i]
+                    }`}
+                  >
                     <Image
                       src={p.img}
                       alt={p.name}
@@ -438,8 +499,12 @@ export default function HomePage() {
               },
             ].map((photo, i) => (
               <Reveal key={photo.src} delay={i * 100}>
-                <figure className="group">
-                  <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-paper-200 border border-espresso-900/8 mb-4">
+                <figure
+                  className={`group bg-white p-3 pb-4 rounded-2xl shadow-lg shadow-espresso-900/8 transition-transform duration-500 hover:rotate-0 hover:-translate-y-1 ${
+                    ["-rotate-[1.8deg]", "rotate-[1.2deg]", "-rotate-[1deg]"][i]
+                  }`}
+                >
+                  <div className="aspect-[4/5] rounded-xl overflow-hidden bg-paper-200">
                     <Image
                       src={photo.src}
                       alt={photo.alt}
@@ -448,7 +513,7 @@ export default function HomePage() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
                   </div>
-                  <figcaption className="text-sm text-espresso-500">
+                  <figcaption className="pt-3 text-center text-sm font-display italic text-espresso-500">
                     {photo.caption}
                   </figcaption>
                 </figure>

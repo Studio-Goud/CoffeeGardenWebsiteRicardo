@@ -209,7 +209,7 @@ function CoffeeSection({
                       </span>
                     )}
                     {c.huisblend && (
-                      <span className="px-3 py-1 bg-sage-800/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
+                      <span className="px-3 py-1 bg-clay-500/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
                         Huisblend
                       </span>
                     )}

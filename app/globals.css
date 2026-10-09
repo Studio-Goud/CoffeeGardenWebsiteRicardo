@@ -31,6 +31,15 @@
   --color-espresso-900: #1a1611;
   --color-espresso-950: #120f0b;
 
+  /* Warm terracotta-accent, geleend van de rode balk op de koffielabels.
+     Spaarzaam gebruiken: stickers, badges, kleine vrolijke momenten. */
+  --color-clay-100: #f7e8e0;
+  --color-clay-200: #ecc9b8;
+  --color-clay-300: #dba888;
+  --color-clay-400: #c97c56;
+  --color-clay-500: #b3603a;
+  --color-clay-600: #964e2e;
+
   --font-sans: var(--font-inter);
   --font-display: var(--font-fraunces);
 

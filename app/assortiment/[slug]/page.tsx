@@ -88,7 +88,7 @@ export default async function CoffeeDetailPage({
                   </span>
                 )}
                 {coffee.huisblend && (
-                  <span className="px-3.5 py-1.5 bg-sage-800/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
+                  <span className="px-3.5 py-1.5 bg-clay-500/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
                     Huisblend
                   </span>
                 )}
