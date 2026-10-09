@@ -109,6 +109,44 @@ export default function HomePage() {
                 Bezoek de winkel
               </Link>
             </div>
+
+            {/* Mobiel: compacte polaroid-duo, op desktop staat de grote collage rechts */}
+            <div className="md:hidden relative mt-14 flex justify-center gap-4 select-none">
+              <figure className="relative w-40 bg-white p-2.5 rounded-xl shadow-lg shadow-espresso-900/15 -rotate-[4deg]">
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-14 h-4 bg-clay-200/80 rotate-[2deg] rounded-[2px]" />
+                <div className="rounded-lg overflow-hidden bg-paper-200">
+                  <Image
+                    src="/images/interieur.jpg"
+                    alt="Het interieur van Coffee Garden"
+                    width={400}
+                    height={480}
+                    className="w-full object-cover aspect-[5/6]"
+                    priority
+                  />
+                </div>
+                <figcaption className="pt-2 text-center text-xs font-display italic text-espresso-500">
+                  ons groene hoekje
+                </figcaption>
+              </figure>
+              <figure className="relative w-40 mt-7 bg-white p-2.5 rounded-xl shadow-lg shadow-espresso-900/15 rotate-[4deg]">
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-12 h-4 bg-sage-200/90 -rotate-[3deg] rounded-[2px]" />
+                <div className="rounded-lg overflow-hidden bg-paper-200">
+                  <Image
+                    src="/images/matcha-moment.jpg"
+                    alt="Iced matcha aan de plantenwand"
+                    width={400}
+                    height={480}
+                    className="w-full object-cover aspect-[5/6]"
+                  />
+                </div>
+                <figcaption className="pt-2 text-center text-xs font-display italic text-espresso-500">
+                  iced matcha!
+                </figcaption>
+              </figure>
+              <span className="absolute -top-5 right-1 rotate-[8deg] inline-flex items-center justify-center w-18 h-18 rounded-full bg-clay-500 text-paper-50 text-center text-[10px] font-semibold uppercase tracking-wider leading-tight shadow-lg shadow-clay-600/30">
+                vers<br />gebrand
+              </span>
+            </div>
           </div>
 
           {/* Polaroid-collage — een beetje scheef, zoals op de koelkast thuis */}
@@ -268,20 +306,20 @@ export default function HomePage() {
             </p>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {categories.map((cat, i) => (
               <Reveal key={cat.title} delay={i * 100}>
                 <Link
                   href={cat.href}
-                  className={`group block h-full p-8 rounded-3xl border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 hover:-translate-y-1.5 transition-all duration-500 ${
+                  className={`group block h-full p-5 sm:p-8 rounded-3xl border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 hover:-translate-y-1.5 transition-all duration-500 ${
                     ["bg-paper-50", "bg-sage-50", "bg-clay-100/60", "bg-paper-50"][i]
                   } ${i % 2 === 0 ? "lg:-rotate-[0.8deg]" : "lg:rotate-[0.8deg]"} hover:rotate-0`}
                 >
-                  <cat.Illustration className="w-20 h-20 mb-7 text-sage-600 transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:-rotate-6 group-hover:text-sage-500" />
-                  <h3 className="font-display text-2xl text-espresso-900 mb-2.5">
+                  <cat.Illustration className="w-14 h-14 sm:w-20 sm:h-20 mb-4 sm:mb-7 text-sage-600 transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:-rotate-6 group-hover:text-sage-500" />
+                  <h3 className="font-display text-xl sm:text-2xl text-espresso-900 mb-2.5">
                     {cat.title}
                   </h3>
-                  <p className="text-sm text-espresso-400 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-espresso-400 leading-relaxed mb-5 sm:mb-6">
                     {cat.subtitle}
                   </p>
                   <span className="inline-flex items-center gap-2 text-sm font-medium text-sage-700 group-hover:text-sage-600 group-hover:gap-3 transition-all duration-300">
@@ -440,7 +478,7 @@ export default function HomePage() {
             </p>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {localProducts.map((p, i) => (
               <Reveal key={p.name} delay={i * 100}>
                 <div className="group">
@@ -457,10 +495,10 @@ export default function HomePage() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                     />
                   </div>
-                  <h3 className="font-display text-lg text-espresso-900 leading-snug">
+                  <h3 className="font-display text-base sm:text-lg text-espresso-900 leading-snug">
                     {p.name}
                   </h3>
-                  <p className="text-sm text-espresso-400 mt-1">{p.desc}</p>
+                  <p className="text-xs sm:text-sm text-espresso-400 mt-1">{p.desc}</p>
                 </div>
               </Reveal>
             ))}
