@@ -11,7 +11,8 @@
  *
  * Prijzen zijn bewust simpel: elke koffiezak is standaard 500 gram en kost
  * €15, ongeacht welke koffie. Meerdere zakken zijn voordeliger (2 voor €28,
- * 3 voor €38). Alles is uitsluitend af te halen in de winkel.
+ * 3 voor €38) — dat bundelvoordeel geldt alleen bij afhalen in de winkel.
+ * Verzenden kan ook: €15 per zak plus PostNL-verzendkosten (SHIPPING_COST).
  */
 
 export type RoastLevel = "light" | "medium" | "medium-dark" | "dark";
@@ -28,7 +29,7 @@ export const BAG_PRICE = 15;
 export const BUNDLES = [
   { qty: 1, label: "1 zak", price: 15 },
   { qty: 2, label: "2 zakken", price: 28 },
-  { qty: 3, label: "3 zakken", price: 35 },
+  { qty: 3, label: "3 zakken", price: 38 },
 ] as const;
 
 /**
@@ -49,12 +50,12 @@ export type Grind = (typeof GRINDS)[number];
 
 /**
  * Totaalprijs bij afhalen: goedkoopste combinatie van staffels
- * (bv. 4 zakken = 3 + 1 = €35 + €15 = €50).
+ * (bv. 4 zakken = 3 + 1 = €38 + €15 = €53).
  */
 export function pickupTotal(bags: number): number {
   let total = 0;
   let n = bags;
-  total += Math.floor(n / 3) * 35;
+  total += Math.floor(n / 3) * 38;
   n = n % 3;
   if (n === 2) total += 28;
   if (n === 1) total += 15;
