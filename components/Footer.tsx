@@ -27,7 +27,7 @@ export default function Footer() {
             </div>
             <p className="text-sm leading-relaxed max-w-xs text-paper-300/80 mb-6">
               Speciaalzaak in koffie &amp; thee aan de Bergselaan in Rotterdam
-              Noord. Koffiebonen, thee, matcha, chai en lokale lekkernijen —
+              Noord. Koffiebonen, thee, matcha, chai en lokale lekkernijen,
               met aandacht geselecteerd.
             </p>
             <a

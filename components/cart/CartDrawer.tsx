@@ -62,8 +62,8 @@ export default function CartDrawer() {
           <div className="flex-1 flex flex-col items-center justify-center gap-4 px-8 text-center">
             <BagIcon className="w-12 h-12 text-sage-400" />
             <p className="text-espresso-500 text-sm leading-relaxed">
-              Je winkelwagen is nog leeg. Alle koffies zijn 500 gram per zak —
-              vanaf 2 zakken krijg je bundelvoordeel bij afhalen.
+              Je winkelwagen is nog leeg. Alle koffies zijn 500 gram per zak.
+              Vanaf 2 zakken krijg je bundelvoordeel bij afhalen.
             </p>
             <Link
               href="/assortiment"

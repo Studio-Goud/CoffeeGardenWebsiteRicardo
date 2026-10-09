@@ -75,7 +75,7 @@ export default function AfrekenenPage() {
       .join("\n");
 
     window.location.href = `mailto:info@coffeegarden.nl?subject=${encodeURIComponent(
-      `Bestelling — ${form.naam}`,
+      `Bestelling van ${form.naam}`,
     )}&body=${encodeURIComponent(body)}`;
     setVerstuurd(true);
     clear();
@@ -90,7 +90,7 @@ export default function AfrekenenPage() {
             Bijna <em className="display-italic text-sage-600">klaar</em>!
           </h1>
           <p className="text-espresso-500 leading-relaxed mb-4">
-            Je mailprogramma is geopend met je bestelling — druk daar op
+            Je mailprogramma is geopend met je bestelling. Druk daar op
             versturen en we gaan voor je aan de slag. We bevestigen je
             bestelling zo snel mogelijk per e-mail.
           </p>
@@ -122,7 +122,7 @@ export default function AfrekenenPage() {
             Je winkelwagen is leeg
           </h1>
           <p className="text-espresso-500 mb-10">
-            Kies eerst een koffie uit ons assortiment — elke zak is 500 gram.
+            Kies eerst een koffie uit ons assortiment, elke zak is 500 gram.
           </p>
           <Link
             href="/assortiment"
@@ -168,7 +168,7 @@ export default function AfrekenenPage() {
                     Afhalen in de winkel
                   </p>
                   <p className="text-sm text-espresso-500 leading-relaxed">
-                    Bergselaan 291-A, Rotterdam. Gratis — mét bundelvoordeel
+                    Bergselaan 291-A, Rotterdam. Gratis, mét bundelvoordeel
                     vanaf 2 zakken.
                   </p>
                 </button>

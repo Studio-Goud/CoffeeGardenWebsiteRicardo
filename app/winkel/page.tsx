@@ -34,7 +34,7 @@ const hours = [
 const expectations = [
   {
     title: "Proef ter plekke",
-    desc: "Schuif aan en ontdek je favoriete koffie of thee — wij schenken in.",
+    desc: "Schuif aan en ontdek je favoriete koffie of thee. Wij schenken in.",
   },
   {
     title: "Persoonlijk advies",
@@ -42,7 +42,7 @@ const expectations = [
   },
   {
     title: "Cadeaupakketten",
-    desc: "Stel een persoonlijk pakket samen — mooi ingepakt en klaar om te geven.",
+    desc: "Stel een persoonlijk pakket samen, mooi ingepakt en klaar om te geven.",
   },
   {
     title: "Lokale producten",
@@ -54,7 +54,7 @@ const travel = [
   {
     Icon: TramIcon,
     label: "Openbaar vervoer",
-    desc: "Tram 8 vanaf Rotterdam Centraal, halte Schieweg — 1 minuut lopen. Of metro tot Blijdorp, ± 7 minuten lopen.",
+    desc: "Tram 8 vanaf Rotterdam Centraal, halte Schieweg, 1 minuut lopen. Of metro tot Blijdorp, ± 7 minuten lopen.",
   },
   {
     Icon: BikeIcon,
@@ -85,7 +85,7 @@ export default function WinkelPage() {
             De <em className="display-italic text-sage-600">winkel</em>
           </h1>
           <p className="text-espresso-500 leading-relaxed max-w-lg">
-            Bergselaan 291-A — loop gewoon binnen, een reservering is nooit
+            Bergselaan 291-A. Loop gewoon binnen, een reservering is nooit
             nodig. De koffie staat klaar.
           </p>
         </div>
@@ -155,7 +155,7 @@ export default function WinkelPage() {
                 </div>
               ))}
               <div className="px-7 py-3.5 text-xs text-espresso-400 border-t border-espresso-900/6 bg-sage-100/40">
-                Buiten deze tijden? Op afspraak kan er veel — mail ons even.
+                Buiten deze tijden? Op afspraak kan er veel, mail ons even.
               </div>
             </div>
           </Reveal>

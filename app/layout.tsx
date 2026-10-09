@@ -22,8 +22,8 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://coffeegarden.nl"),
   title: {
-    default: "Coffee Garden — Speciaalzaak in koffie & thee, Rotterdam",
-    template: "%s — Coffee Garden Rotterdam",
+    default: "Coffee Garden · Speciaalzaak in koffie & thee, Rotterdam",
+    template: "%s · Coffee Garden Rotterdam",
   },
   description:
     "Coffee Garden is dé koffie- en theespeciaalzaak aan de Bergselaan in Rotterdam. Koffiebonen, thee, matcha, chai en lokale lekkernijen. Kom proeven.",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     apple: "/favicon.png",
   },
   openGraph: {
-    title: "Coffee Garden — Speciaalzaak in koffie & thee",
+    title: "Coffee Garden · Speciaalzaak in koffie & thee",
     description:
       "Koffie, thee, matcha en lokale lekkernijen aan de Bergselaan in Rotterdam. Kom proeven.",
     locale: "nl_NL",

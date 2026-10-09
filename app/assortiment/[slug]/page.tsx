@@ -30,7 +30,7 @@ export async function generateMetadata({
   if (!coffee) return {};
   return {
     title: coffee.name,
-    description: `${coffee.name} — ${coffee.notes.join(", ")}. ${coffee.description}`,
+    description: `${coffee.name}: ${coffee.notes.join(", ")}. ${coffee.description}`,
   };
 }
 
@@ -130,7 +130,7 @@ export default async function CoffeeDetailPage({
             {/* Prijzen */}
             <div className="bg-paper-50 rounded-3xl border border-espresso-900/8 p-7 mb-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-espresso-400 mb-5">
-                Prijzen — zakken van 500 gram
+                Prijzen · zakken van 500 gram
               </p>
               <div className="grid grid-cols-3 divide-x divide-espresso-900/8">
                 {BUNDLES.map((b) => (
@@ -143,7 +143,7 @@ export default async function CoffeeDetailPage({
                 ))}
               </div>
               <p className="text-xs text-espresso-400 mt-5 text-center">
-                Bundelprijs geldt bij afhalen in de winkel. Verzenden kan ook —
+                Bundelprijs geldt bij afhalen in de winkel. Verzenden kan ook:
                 €15 per zak plus PostNL-verzendkosten.
               </p>
             </div>

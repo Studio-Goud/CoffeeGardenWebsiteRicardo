@@ -125,7 +125,7 @@ export const coffees: Coffee[] = [
     roast: "light",
     beans: "100% Arabica",
     description:
-      "Een van de meest gevierde origins ter wereld. De Sidama-regio in zuidelijk Ethiopië levert bonen met een sprekend, parfumachtig karakter — bloemig, met heldere citrustonen en een fluweelzachte honing-zoetheid in de afdronk. Licht gebrand zodat de origin alle ruimte krijgt.",
+      "Een van de meest gevierde origins ter wereld. De Sidama-regio in zuidelijk Ethiopië levert bonen met een sprekend, parfumachtig karakter: bloemig, met heldere citrustonen en een fluweelzachte honing-zoetheid in de afdronk. Licht gebrand zodat de origin alle ruimte krijgt.",
     brewing: "Perfect als filter (V60, Chemex) of als single-origin espresso.",
     image: "/products/ethiopia-yirgacheffe.png",
     thumb: "/products/ethiopia-yirgacheffe-thumb.png",
@@ -142,7 +142,7 @@ export const coffees: Coffee[] = [
     beans: "100% Arabica",
     description:
       "Klassiek Colombiaans uit de Huila-regio. Zachte noten van walnoot en hazelnoot, een lichte zoetheid van rood fruit en een rond chocoladelichaam. Medium gebrand voor een vol en uitgebalanceerd kopje, dag in dag uit.",
-    brewing: "Sterke allrounder — filter, French press of espresso.",
+    brewing: "Sterke allrounder: filter, French press of espresso.",
     image: "/products/colombia-supremo.png",
     thumb: "/products/colombia-supremo-thumb.png",
   },
@@ -158,7 +158,7 @@ export const coffees: Coffee[] = [
     beans: "100% Arabica",
     description:
       "Biologisch gecertificeerd uit de hooglanden van Cajamarca. Een diepe, romige body met karamel-zoetheid, cacao en zachte notentonen. Schone afdronk, ideaal voor wie houdt van een rustig maar vol kopje.",
-    brewing: "Mooi als latte of cappuccino — laat de melk z'n karamel binden.",
+    brewing: "Mooi als latte of cappuccino, laat de melk z'n karamel binden.",
     image: "/products/peru-cajamarca.png",
     thumb: "/products/peru-cajamarca-thumb.png",
     bio: true,
@@ -174,7 +174,7 @@ export const coffees: Coffee[] = [
     roast: "medium",
     beans: "100% Arabica",
     description:
-      "Biologisch en fair-trade uit de Chiapas-regio in Mexico. Een gulle, melkchocolade-rijke smaak met bruine suiker en geroosterde amandel. Een van onze meest geliefde dagelijkse koffies — vriendelijk, vol en eerlijk.",
+      "Biologisch en fair-trade uit de Chiapas-regio in Mexico. Een gulle, melkchocolade-rijke smaak met bruine suiker en geroosterde amandel. Een van onze meest geliefde dagelijkse koffies: vriendelijk, vol en eerlijk.",
     brewing: "Heerlijk als espresso of in een AeroPress.",
     image: "/products/casa-del-pueblo.png",
     thumb: "/products/casa-del-pueblo-thumb.png",
@@ -208,8 +208,8 @@ export const coffees: Coffee[] = [
     roast: "medium",
     beans: "100% Arabica",
     description:
-      "Onze huisblend, met zorg samengesteld rond Yellow Bourbon bonen. Een zachte, honingzoete espresso met amandel en hints van gele vruchten — als je 'm 's ochtends bij de croissant zet weet je waarom 'ie zo heet.",
-    brewing: "Espresso of moka pot — laat de honing-zoetheid bloeien.",
+      "Onze huisblend, met zorg samengesteld rond Yellow Bourbon bonen. Een zachte, honingzoete espresso met amandel en hints van gele vruchten. Als je 'm 's ochtends bij de croissant zet weet je waarom 'ie zo heet.",
+    brewing: "Espresso of moka pot, laat de honing-zoetheid bloeien.",
     image: "/products/fleur-de-miel.png",
     thumb: "/products/fleur-de-miel-thumb.png",
     huisblend: true,
@@ -224,7 +224,7 @@ export const coffees: Coffee[] = [
     beans: "100% Arabica",
     description:
       "Een heldere, levendige espresso-blend met karamel, een vleugje sinaasappel en cacao. Genoeg karakter om de melk te dragen, schoon genoeg om puur te drinken.",
-    brewing: "Cortado of flat white — de citrus blijft mooi staan.",
+    brewing: "Cortado of flat white, de citrus blijft mooi staan.",
     image: "/products/prima-luce.png",
     thumb: "/products/prima-luce-thumb.png",
   },
@@ -237,7 +237,7 @@ export const coffees: Coffee[] = [
     roast: "medium-dark",
     beans: "Arabica · Robusta",
     description:
-      "Het essentiële kopje. Een evenwichtige blend van Arabica en Robusta met een degelijk lichaam van noten, chocolade en gebrand brood. Geen verrassingen — wel pure betrouwbaarheid.",
+      "Het essentiële kopje. Een evenwichtige blend van Arabica en Robusta met een degelijk lichaam van noten, chocolade en gebrand brood. Geen verrassingen, wel pure betrouwbaarheid.",
     brewing: "Klassieke espresso of latte.",
     image: "/products/lessentiel.png",
     thumb: "/products/lessentiel-thumb.png",
@@ -251,7 +251,7 @@ export const coffees: Coffee[] = [
     roast: "dark",
     beans: "Arabica · Robusta",
     description:
-      "Donker gebrand, vol karakter. Pure cacao, zwarte noten en een rokerige diepte. Voor wie houdt van een Italiaanse espresso met body — met crema die blijft staan.",
+      "Donker gebrand, vol karakter. Pure cacao, zwarte noten en een rokerige diepte. Voor wie houdt van een Italiaanse espresso met body, met crema die blijft staan.",
     brewing: "Espresso, ristretto of moka pot.",
     image: "/products/reserve-noire.png",
     thumb: "/products/reserve-noire-thumb.png",
@@ -280,7 +280,7 @@ export const coffees: Coffee[] = [
     beans: "Arabica · Robusta",
     description:
       "Een klassieke espresso-blend zoals 'ie bedoeld is. Melkchocolade, geroosterde hazelnoot en een vleugje vanille. Romig, royaal en onmiskenbaar Italiaans van sfeer.",
-    brewing: "Cappuccino of caffè latte — de hazelnoot bindt prachtig met melk.",
+    brewing: "Cappuccino of caffè latte, de hazelnoot bindt prachtig met melk.",
     image: "/products/magnifico.png",
     thumb: "/products/magnifico-thumb.png",
   },
@@ -293,7 +293,7 @@ export const coffees: Coffee[] = [
     roast: "dark",
     beans: "Arabica · Robusta",
     description:
-      "Aards, vol en een tikje kruidig. Cacao, gedroogd fruit en een echo van kruidnagel. Een blend voor wie het Mediterrane karakter zoekt — donker maar nooit verbrand.",
+      "Aards, vol en een tikje kruidig. Cacao, gedroogd fruit en een echo van kruidnagel. Een blend voor wie het Mediterrane karakter zoekt: donker, maar nooit verbrand.",
     brewing: "Espresso of als basis voor een sterke cortado.",
     image: "/products/domaine.png",
     thumb: "/products/domaine-thumb.png",
@@ -307,7 +307,7 @@ export const coffees: Coffee[] = [
     roast: "dark",
     beans: "Arabica · Robusta",
     description:
-      "Onze meest uitgesproken blend. Donker fruit, een spannende vleugje zwarte peper en een pure espresso-finish. Voor wie van het stoere werk houdt — geen halfzachte koffie hier.",
+      "Onze meest uitgesproken blend. Donker fruit, een spannende vleugje zwarte peper en een pure espresso-finish. Voor wie van het stoere werk houdt, geen halfzachte koffie hier.",
     brewing: "Pure espresso of ristretto, geen melk nodig.",
     image: "/products/bellissimo.png",
     thumb: "/products/bellissimo-thumb.png",

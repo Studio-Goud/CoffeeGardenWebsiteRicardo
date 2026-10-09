@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Workshops & high tea",
   description:
-    "Workshops bij Coffee Garden Rotterdam — de Koffie Workshop en de Thee Melangeren Workshop in high tea-stijl. Kleine groepen, persoonlijke begeleiding.",
+    "Workshops bij Coffee Garden Rotterdam: de Koffie Workshop en de Thee Melangeren Workshop in high tea-stijl. Kleine groepen, persoonlijke begeleiding.",
 };
 
 const upcoming = [
@@ -75,7 +75,7 @@ export default function WorkshopsPage() {
                 <em className="display-italic text-sage-600">starten</em>?
               </h2>
               <p className="text-espresso-500 text-sm leading-relaxed max-w-md mb-8">
-                Stuur een mailtje en we zetten je op de lijst — of kom langs in
+                Stuur een mailtje en we zetten je op de lijst, of kom langs in
                 de winkel, dan vertellen we je alles onder het genot van een
                 kopje.
               </p>

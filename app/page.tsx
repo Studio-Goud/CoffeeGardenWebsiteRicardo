@@ -18,7 +18,7 @@ import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES } from "@/lib/products";
 const categories = [
   {
     title: "Koffiebonen",
-    subtitle: "13 eigen koffies — single origins en huisblends, vers gebrand.",
+    subtitle: "13 eigen koffies: single origins en huisblends, vers gebrand.",
     href: "/assortiment",
     Illustration: CupIllustration,
   },
@@ -86,7 +86,7 @@ export default function HomePage() {
 
             <p className="text-lg md:text-xl text-espresso-500 leading-relaxed max-w-xl mb-12">
               Speciaalzaak in koffie, thee, matcha en chai. Kom
-              proeven, ruiken en kiezen — wij nemen de tijd voor je.
+              proeven, ruiken en kiezen. Wij nemen de tijd voor je.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -192,12 +192,12 @@ export default function HomePage() {
             <Squiggle className="w-28 text-clay-400 mb-6" />
             <p className="text-espresso-500 leading-relaxed mb-5 max-w-md">
               Wij selecteren met passie onze koffies van kleine, duurzame
-              boerderijen wereldwijd — van Ethiopische naturals tot
+              boerderijen wereldwijd, van Ethiopische naturals tot
               Colombiaanse washed lots.
             </p>
             <p className="text-espresso-500 leading-relaxed mb-10 max-w-md">
               In de winkel aan de Bergselaan kun je rustig proeven, vragen
-              stellen en je laten adviseren. Geen haast, geen poeha — wél heel
+              stellen en je laten adviseren. Geen haast, geen poeha, wél heel
               goede koffie.
             </p>
 
@@ -225,7 +225,7 @@ export default function HomePage() {
                 <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-sage-100">
                   <Image
                     src="/images/interieur.jpg"
-                    alt="Het interieur van Coffee Garden — lichte houten tafels, planten en veel daglicht"
+                    alt="Het interieur van Coffee Garden: lichte houten tafels, planten en veel daglicht"
                     width={1303}
                     height={1600}
                     className="w-full h-full object-cover"
@@ -374,7 +374,7 @@ export default function HomePage() {
               De <em className="display-italic text-sage-600">menukaart</em>
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed max-w-md mx-auto">
-              Elke koffiezak is standaard 500 gram — één vaste prijs voor al
+              Elke koffiezak is standaard 500 gram, één vaste prijs voor al
               onze koffies. Alle bonen malen we gratis op jouw zetmethode.
             </p>
           </Reveal>
@@ -399,7 +399,7 @@ export default function HomePage() {
                       {b.qty} × 500 gram
                       {b.qty * BAG_PRICE > b.price && (
                         <span className="text-clay-600 font-medium">
-                          {` — je bespaart €${b.qty * BAG_PRICE - b.price},-`}
+                          {` · je bespaart €${b.qty * BAG_PRICE - b.price},-`}
                         </span>
                       )}
                     </p>
@@ -410,8 +410,8 @@ export default function HomePage() {
                 </div>
               ))}
               <p className="pt-5 border-t border-espresso-900/8 text-xs text-espresso-400 text-center">
-                Bundelprijzen gelden bij afhalen in de winkel. Verzenden kan ook
-                — €15 per zak plus PostNL-verzendkosten.
+                Bundelprijzen gelden bij afhalen in de winkel. Verzenden kan ook:
+                €15 per zak plus PostNL-verzendkosten.
               </p>
             </div>
           </Reveal>
@@ -432,7 +432,7 @@ export default function HomePage() {
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed">
               Naast koffie en thee selecteren we producten van ambachtelijke
-              makers uit de regio — alleen verkrijgbaar in de winkel.
+              makers uit de regio, alleen verkrijgbaar in de winkel.
             </p>
           </Reveal>
 
@@ -476,7 +476,7 @@ export default function HomePage() {
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed">
               Schuif aan tussen de planten voor een iced matcha, een verse
-              panini of een yoghurt bowl — of neem &apos;m mee voor onderweg.
+              panini of een yoghurt bowl. Of neem &apos;m mee voor onderweg.
             </p>
           </Reveal>
 
@@ -538,7 +538,7 @@ export default function HomePage() {
             </h2>
             <p className="text-sage-200/80 leading-relaxed max-w-md mb-10">
               Geen reservering nodig. Schuif aan, drink een kopje en laat je
-              adviseren — wij nemen de tijd voor je.
+              adviseren. Wij nemen de tijd voor je.
             </p>
             <Link
               href="/winkel"

@@ -14,14 +14,14 @@ import { coffees, BAG_PRICE, BAG_SIZE, type Coffee } from "@/lib/products";
 export const metadata: Metadata = {
   title: "Assortiment",
   description:
-    "13 eigen koffies — single origins en huisblends — plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
+    "13 eigen koffies (single origins en huisblends) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
 };
 
 const inStoreCategories = [
   {
     id: "thee",
     label: "Thee",
-    desc: "Ruim 30 variëteiten — van Japanse sencha tot Darjeeling first flush.",
+    desc: "Ruim 30 variëteiten, van Japanse sencha tot Darjeeling first flush.",
     Illustration: TeaIllustration,
   },
   {
@@ -88,11 +88,11 @@ async function AssortimentContent({
               <highlighted.Illustration className="w-16 h-16 text-sage-700 shrink-0" />
               <div className="flex-1">
                 <h2 className="font-display text-2xl text-espresso-900 mb-1">
-                  {highlighted.label} — proef het in de winkel
+                  {highlighted.label} proef je in de winkel
                 </h2>
                 <p className="text-sm text-espresso-500 leading-relaxed max-w-xl">
                   {highlighted.desc} Ons {highlighted.label.toLowerCase()}
-                  -assortiment is (nog) niet online te bestellen — kom langs,
+                  -assortiment is (nog) niet online te bestellen. Kom langs,
                   dan laten we je proeven en kiezen.
                 </p>
               </div>
