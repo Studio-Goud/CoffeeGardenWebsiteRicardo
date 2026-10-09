@@ -92,6 +92,11 @@ export default async function CoffeeDetailPage({
                     Huisblend
                   </span>
                 )}
+                {coffee.decaf && (
+                  <span className="px-3.5 py-1.5 bg-espresso-400/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full">
+                    Decaf
+                  </span>
+                )}
               </div>
             </div>
           </div>

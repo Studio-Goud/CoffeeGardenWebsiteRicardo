@@ -92,6 +92,7 @@ export interface Coffee {
   thumb: string;
   bio?: boolean;
   huisblend?: boolean;
+  decaf?: boolean;
 }
 
 const NL_ROAST: Record<RoastLevel, string> = {
@@ -107,6 +108,7 @@ export function roastLabel(r: RoastLevel): string {
 
 /** Categorie-label voor de detailpagina, bv. "BIO · Single Origin". */
 export function categoryLabel(coffee: Coffee): string {
+  if (coffee.decaf) return "Decaf · Single Origin";
   if (coffee.bio) return "BIO · Single Origin";
   if (coffee.type === "single-origin") return "Single Origin";
   return "Huisblend";
@@ -145,6 +147,23 @@ export const coffees: Coffee[] = [
     brewing: "Sterke allrounder: filter, French press of espresso.",
     image: "/products/colombia-supremo-bag.jpg",
     thumb: "/products/colombia-supremo-bag-thumb.jpg",
+  },
+  {
+    slug: "colombia-huila-decaf",
+    name: "Colombia Huila Decaf",
+    type: "single-origin",
+    origin: "Colombia · Huila",
+    process: "Sugarcane EA (decaf)",
+    altitude: "1700 m",
+    notes: ["cacao", "amandel", "rood fruit"],
+    roast: "medium",
+    beans: "100% Arabica",
+    description:
+      "Alle smaak van Huila, zonder de cafeïne. Deze decaf wordt ontcafeïneerd met het natuurlijke sugarcane-proces (EA), dat de boon met rust laat: een rond, zacht kopje met cacao, geroosterde amandel en een vleugje rood fruit. Ook om tien uur 's avonds een goed idee.",
+    brewing: "Espresso of filter, je proeft niet dat er iets mist.",
+    image: "/products/colombia-huila-decaf-bag.jpg",
+    thumb: "/products/colombia-huila-decaf-bag-thumb.jpg",
+    decaf: true,
   },
   {
     slug: "peru-cajamarca",
@@ -210,8 +229,8 @@ export const coffees: Coffee[] = [
     description:
       "Onze huisblend, met zorg samengesteld rond Yellow Bourbon bonen. Een zachte, honingzoete espresso met amandel en hints van gele vruchten. Als je 'm 's ochtends bij de croissant zet weet je waarom 'ie zo heet.",
     brewing: "Espresso of moka pot, laat de honing-zoetheid bloeien.",
-    image: "/products/fleur-de-miel.png",
-    thumb: "/products/fleur-de-miel-thumb.png",
+    image: "/products/fleur-de-miel-bag.jpg",
+    thumb: "/products/fleur-de-miel-bag-thumb.jpg",
     huisblend: true,
   },
   {
@@ -225,8 +244,8 @@ export const coffees: Coffee[] = [
     description:
       "Een heldere, levendige espresso-blend met karamel, een vleugje sinaasappel en cacao. Genoeg karakter om de melk te dragen, schoon genoeg om puur te drinken.",
     brewing: "Cortado of flat white, de citrus blijft mooi staan.",
-    image: "/products/prima-luce.png",
-    thumb: "/products/prima-luce-thumb.png",
+    image: "/products/prima-luce-bag.jpg",
+    thumb: "/products/prima-luce-bag-thumb.jpg",
   },
   {
     slug: "lessentiel",
@@ -239,8 +258,8 @@ export const coffees: Coffee[] = [
     description:
       "Het essentiële kopje. Een evenwichtige blend van Arabica en Robusta met een degelijk lichaam van noten, chocolade en gebrand brood. Geen verrassingen, wel pure betrouwbaarheid.",
     brewing: "Klassieke espresso of latte.",
-    image: "/products/lessentiel.png",
-    thumb: "/products/lessentiel-thumb.png",
+    image: "/products/lessentiel-bag.jpg",
+    thumb: "/products/lessentiel-bag-thumb.jpg",
   },
   {
     slug: "reserve-noire",
@@ -253,8 +272,8 @@ export const coffees: Coffee[] = [
     description:
       "Donker gebrand, vol karakter. Pure cacao, zwarte noten en een rokerige diepte. Voor wie houdt van een Italiaanse espresso met body, met crema die blijft staan.",
     brewing: "Espresso, ristretto of moka pot.",
-    image: "/products/reserve-noire.png",
-    thumb: "/products/reserve-noire-thumb.png",
+    image: "/products/reserve-noire-bag.jpg",
+    thumb: "/products/reserve-noire-bag-thumb.jpg",
   },
   {
     slug: "velours",
@@ -295,8 +314,8 @@ export const coffees: Coffee[] = [
     description:
       "Aards, vol en een tikje kruidig. Cacao, gedroogd fruit en een echo van kruidnagel. Een blend voor wie het Mediterrane karakter zoekt: donker, maar nooit verbrand.",
     brewing: "Espresso of als basis voor een sterke cortado.",
-    image: "/products/domaine.png",
-    thumb: "/products/domaine-thumb.png",
+    image: "/products/domaine-bag.jpg",
+    thumb: "/products/domaine-bag-thumb.jpg",
   },
   {
     slug: "bellissimo",
@@ -309,8 +328,8 @@ export const coffees: Coffee[] = [
     description:
       "Onze meest uitgesproken blend. Donker fruit, een spannende vleugje zwarte peper en een pure espresso-finish. Voor wie van het stoere werk houdt, geen halfzachte koffie hier.",
     brewing: "Pure espresso of ristretto, geen melk nodig.",
-    image: "/products/bellissimo.png",
-    thumb: "/products/bellissimo-thumb.png",
+    image: "/products/bellissimo-bag.jpg",
+    thumb: "/products/bellissimo-bag-thumb.jpg",
   },
 ];
 

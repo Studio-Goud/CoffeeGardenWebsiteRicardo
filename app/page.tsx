@@ -18,7 +18,7 @@ import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES } from "@/lib/products";
 const categories = [
   {
     title: "Koffiebonen",
-    subtitle: "13 eigen koffies: single origins en huisblends, vers gebrand.",
+    subtitle: "14 eigen koffies: single origins, huisblends en een decaf, vers gebrand.",
     href: "/assortiment",
     Illustration: CupIllustration,
   },
@@ -43,10 +43,14 @@ const categories = [
 ];
 
 const localProducts = [
+  { name: "Granola van Leanne's Bakery", desc: "Rotterdams gebakken, in vier smaken: naturel, chocola, kokos en appel-kaneel", img: "/images/granola.jpg" },
   { name: "Stroopwafels in blik", desc: "Echte Goudse ambacht", img: "/stroopwafel.jpg" },
-  { name: "Speculaas in blik", desc: "Klassiek Nederlands gebak", img: "/speculaas.jpg" },
+  { name: "Speculaas in blik", desc: "Klassiek Nederlands gebak in een Delfts blauw bewaarblik", img: "/images/speculaas-blik.jpg" },
   { name: "Cocosbollen van Madame Cocos", desc: "Handgemaakt, romig en vers", img: "/Madame Cocos.png" },
-  { name: "Delfts Blauw", desc: "Authentiek aardewerk als cadeau", img: "/delfts-blauw.jpg" },
+  { name: "Delfts Blauw", desc: "Vazen, mokken, schaaltjes en meer: authentiek aardewerk als cadeau", img: "/images/delfts-blauw-vaas.jpg" },
+  { name: "Bewaarblikken", desc: "Met Van Goghs amandelbloesem of Hollandse tulpen", img: "/images/bewaarblik.jpg" },
+  { name: "Drinkflessen & tote bags", desc: "Met tulpen, Van Gogh-prints en Rotterdam-designs", img: "/images/drinkfles-tulpen.jpg" },
+  { name: "Rotterdam-souvenirs", desc: "Magneten, sleutelhangers en onderzetters met de skyline", img: "/images/rotterdam-souvenirs.jpg" },
 ];
 
 const marqueeItems = [
@@ -203,7 +207,7 @@ export default function HomePage() {
 
             <dl className="grid grid-cols-3 gap-6 max-w-md border-t border-espresso-900/10 pt-8">
               {[
-                { value: "13", label: "Eigen koffies" },
+                { value: "14", label: "Eigen koffies" },
                 { value: "30+", label: "Theevariëteiten" },
                 { value: "7/7", label: "Dagen per week open" },
               ].map((s) => (
@@ -307,7 +311,7 @@ export default function HomePage() {
               href="/assortiment"
               className="group inline-flex items-center gap-2 text-sm font-medium text-espresso-700 hover:text-sage-700 transition-colors mt-6 md:mt-0"
             >
-              Alle 13 koffies
+              Alle 14 koffies
               <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </Reveal>
@@ -423,16 +427,16 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <Reveal className="mb-16 max-w-xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-4">
-              Lokaal &amp; ambachtelijk
+              Alleen in de winkel
             </p>
             <h2 className="font-display text-4xl md:text-5xl tracking-tight text-espresso-900 mb-5">
-              Lekkers van <em className="display-italic text-sage-600">makers</em>
+              Cadeaus &amp; <em className="display-italic text-sage-600">lekkers</em>
               <br />
-              uit de buurt
+              uit de winkel
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed">
-              Naast koffie en thee selecteren we producten van ambachtelijke
-              makers uit de regio, alleen verkrijgbaar in de winkel.
+              Naast koffie en thee vind je bij ons lekkers van lokale makers en
+              leuke cadeaus: van Delfts blauw tot Rotterdam-souvenirs.
             </p>
           </Reveal>
 
@@ -442,7 +446,7 @@ export default function HomePage() {
                 <div className="group">
                   <div
                     className={`aspect-square rounded-3xl overflow-hidden bg-paper-200 border border-espresso-900/8 mb-4 transition-transform duration-500 group-hover:rotate-0 ${
-                      ["-rotate-[1.5deg]", "rotate-[1deg]", "-rotate-[1deg]", "rotate-[1.5deg]"][i]
+                      ["-rotate-[1.5deg]", "rotate-[1deg]", "-rotate-[1deg]", "rotate-[1.5deg]"][i % 4]
                     }`}
                   >
                     <Image

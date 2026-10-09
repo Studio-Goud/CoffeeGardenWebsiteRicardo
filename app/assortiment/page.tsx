@@ -14,7 +14,7 @@ import { coffees, BAG_PRICE, BAG_SIZE, type Coffee } from "@/lib/products";
 export const metadata: Metadata = {
   title: "Assortiment",
   description:
-    "13 eigen koffies (single origins en huisblends) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
+    "14 eigen koffies (single origins, huisblends en een decaf) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
 };
 
 const inStoreCategories = [
@@ -211,6 +211,11 @@ function CoffeeSection({
                     {c.huisblend && (
                       <span className="px-3 py-1 bg-clay-500/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
                         Huisblend
+                      </span>
+                    )}
+                    {c.decaf && (
+                      <span className="px-3 py-1 bg-espresso-400/90 backdrop-blur text-paper-100 text-[10px] font-semibold uppercase tracking-[0.15em] rounded-full self-start">
+                        Decaf
                       </span>
                     )}
                   </div>
