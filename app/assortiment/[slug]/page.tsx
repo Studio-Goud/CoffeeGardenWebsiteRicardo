@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import RoastScale from "@/components/RoastScale";
 import { ArrowIcon, PinIcon, LeafIcon, SparkIcon } from "@/components/Icons";
 import { SteamLines } from "@/components/Illustrations";
+import AddToCart from "@/components/cart/AddToCart";
 import {
   coffees,
   getCoffeeBySlug,
@@ -142,17 +143,19 @@ export default async function CoffeeDetailPage({
                 ))}
               </div>
               <p className="text-xs text-espresso-400 mt-5 text-center">
-                Af te halen in de winkel — gratis gemalen op jouw zetmethode, of
-                als hele boon mee naar huis.
+                Bundelprijs geldt bij afhalen in de winkel. Verzenden kan ook —
+                €15 per zak plus PostNL-verzendkosten.
               </p>
             </div>
 
+            <AddToCart slug={coffee.slug} />
+
             <Link
               href="/winkel"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
+              className="group mt-6 inline-flex items-center gap-2 text-sm text-espresso-500 hover:text-sage-700 transition-colors"
             >
-              <PinIcon className="w-4.5 h-4.5" />
-              Verkrijgbaar in de winkel
+              <PinIcon className="w-4 h-4" />
+              Liever eerst proeven? Kom langs in de winkel
             </Link>
 
             {/* Specificaties */}

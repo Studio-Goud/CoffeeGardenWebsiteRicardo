@@ -3,6 +3,8 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/components/cart/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,9 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="min-h-screen flex flex-col bg-paper-100 text-espresso-900 antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

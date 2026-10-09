@@ -103,3 +103,36 @@ export function SparkIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function BagIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden>
+      <path d="M5.5 8.5h13l-1 11.5a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4l-1-11.5Z" />
+      <path d="M8.5 8.5V7a3.5 3.5 0 0 1 7 0v1.5" />
+    </svg>
+  );
+}
+
+export function MinusIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden>
+      <path d="M6 12h12" />
+    </svg>
+  );
+}
+
+export function PlusIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden>
+      <path d="M12 6v12M6 12h12" />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden>
+      <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
+    </svg>
+  );
+}

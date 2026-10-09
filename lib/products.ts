@@ -21,12 +21,50 @@ export type CoffeeType = "single-origin" | "espresso-blend";
 export const BAG_SIZE = "500 gr";
 export const BAG_PRICE = 15;
 
-/** Staffelprijzen in euro's (zelfde als op het bord in de winkel). */
+/**
+ * Staffelprijzen in euro's (zelfde als op het bord in de winkel).
+ * De bundelkorting geldt alleen bij afhalen in de winkel.
+ */
 export const BUNDLES = [
   { qty: 1, label: "1 zak", price: 15 },
   { qty: 2, label: "2 zakken", price: 28 },
-  { qty: 3, label: "3 zakken", price: 38 },
+  { qty: 3, label: "3 zakken", price: 35 },
 ] as const;
+
+/**
+ * Verzendtarief per bestelling (PostNL pakket t/m 10 kg, binnen NL).
+ * LET OP: controleer dit bedrag tegen de actuele PostNL-tarieven.
+ */
+export const SHIPPING_COST = 7.95;
+
+/** Maalwijzes — gratis gemalen op jouw zetmethode, of als hele boon. */
+export const GRINDS = [
+  "Hele bonen",
+  "Filter",
+  "Espresso",
+  "French press",
+  "Moka pot",
+] as const;
+export type Grind = (typeof GRINDS)[number];
+
+/**
+ * Totaalprijs bij afhalen: goedkoopste combinatie van staffels
+ * (bv. 4 zakken = 3 + 1 = €35 + €15 = €50).
+ */
+export function pickupTotal(bags: number): number {
+  let total = 0;
+  let n = bags;
+  total += Math.floor(n / 3) * 35;
+  n = n % 3;
+  if (n === 2) total += 28;
+  if (n === 1) total += 15;
+  return total;
+}
+
+/** Totaalprijs bij verzenden: géén bundelkorting, plus verzendkosten. */
+export function shippingTotal(bags: number): number {
+  return bags * BAG_PRICE + (bags > 0 ? SHIPPING_COST : 0);
+}
 
 export interface Coffee {
   slug: string;

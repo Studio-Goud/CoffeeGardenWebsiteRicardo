@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
+import { BagIcon } from "./Icons";
+import { useCart } from "./cart/CartContext";
 
 const links = [
   { href: "/assortiment", label: "Assortiment" },
@@ -15,6 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const { bagCount, openDrawer } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -65,6 +68,18 @@ export default function Navbar() {
               </Link>
             );
           })}
+          <button
+            onClick={openDrawer}
+            aria-label={`Winkelwagen openen (${bagCount} ${bagCount === 1 ? "zak" : "zakken"})`}
+            className="relative w-10 h-10 rounded-full flex items-center justify-center text-espresso-700 hover:text-sage-700 hover:bg-sage-100 transition-colors"
+          >
+            <BagIcon className="w-5 h-5" />
+            {bagCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-sage-700 text-paper-100 text-[10px] font-semibold flex items-center justify-center tabular-nums">
+                {bagCount}
+              </span>
+            )}
+          </button>
           <Link
             href="/winkel"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
@@ -73,17 +88,31 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Mobiel: hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-[5px]"
-          aria-label={open ? "Menu sluiten" : "Menu openen"}
-          aria-expanded={open}
-        >
-          <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "rotate-45 translate-y-[6.5px]" : ""}`} />
-          <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
-        </button>
+        {/* Mobiel: winkelwagen + hamburger */}
+        <div className="md:hidden flex items-center gap-1">
+          <button
+            onClick={openDrawer}
+            aria-label={`Winkelwagen openen (${bagCount} ${bagCount === 1 ? "zak" : "zakken"})`}
+            className="relative w-10 h-10 rounded-full flex items-center justify-center text-espresso-700"
+          >
+            <BagIcon className="w-5 h-5" />
+            {bagCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-sage-700 text-paper-100 text-[10px] font-semibold flex items-center justify-center tabular-nums">
+                {bagCount}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setOpen(!open)}
+            className="relative w-10 h-10 flex flex-col items-center justify-center gap-[5px]"
+            aria-label={open ? "Menu sluiten" : "Menu openen"}
+            aria-expanded={open}
+          >
+            <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "rotate-45 translate-y-[6.5px]" : ""}`} />
+            <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-[1.5px] bg-espresso-900 transition-all duration-300 ${open ? "-rotate-45 -translate-y-[6.5px]" : ""}`} />
+          </button>
+        </div>
       </nav>
 
       {/* Mobiel menu */}

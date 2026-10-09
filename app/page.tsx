@@ -353,7 +353,8 @@ export default function HomePage() {
                 </div>
               ))}
               <p className="pt-5 border-t border-espresso-900/8 text-xs text-espresso-400 text-center">
-                Alle koffiezakken zijn af te halen in de winkel.
+                Bundelprijzen gelden bij afhalen in de winkel. Verzenden kan ook
+                — €15 per zak plus PostNL-verzendkosten.
               </p>
             </div>
           </Reveal>
