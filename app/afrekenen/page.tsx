@@ -11,6 +11,7 @@ import {
   shippingTotal,
   BAG_PRICE,
   SHIPPING_COST,
+  WEBSHOP_OPEN,
 } from "@/lib/products";
 
 function euro(n: number): string {
@@ -113,6 +114,31 @@ export default function AfrekenenPage() {
     )}&body=${encodeURIComponent(body)}`;
     setVerstuurd(true);
     clear();
+  }
+
+  if (!WEBSHOP_OPEN) {
+    return (
+      <div className="grain bg-paper-100 min-h-svh flex items-center px-5 sm:px-8">
+        <div className="max-w-xl mx-auto text-center py-32">
+          <BagIcon className="w-12 h-12 text-sage-400 mx-auto mb-6" />
+          <h1 className="font-display text-4xl md:text-5xl text-espresso-900 mb-5">
+            Bijna <em className="display-italic text-sage-600">open</em>!
+          </h1>
+          <p className="text-espresso-500 leading-relaxed mb-10">
+            We leggen de laatste hand aan de webshop. Online bestellen kan
+            binnenkort; tot die tijd is alles gewoon af te halen in de winkel
+            aan de Bergselaan 291-A.
+          </p>
+          <Link
+            href="/winkel"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors"
+          >
+            Bezoek de winkel
+            <ArrowIcon className="w-4.5 h-4.5" />
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   if (verstuurd) {

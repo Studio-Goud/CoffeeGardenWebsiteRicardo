@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/cart/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import { WEBSHOP_OPEN } from "@/lib/products";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -59,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
-          <CartDrawer />
+          {WEBSHOP_OPEN && <CartDrawer />}
         </CartProvider>
       </body>
     </html>

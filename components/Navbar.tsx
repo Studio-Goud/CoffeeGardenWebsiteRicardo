@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { BagIcon } from "./Icons";
 import { useCart } from "./cart/CartContext";
+import { WEBSHOP_OPEN } from "@/lib/products";
 
 const links = [
-  { href: "/assortiment", label: "Assortiment" },
+  { href: "/assortiment", label: "Webshop" },
   { href: "/cadeaus", label: "Cadeaus" },
   { href: "/workshops", label: "Workshops" },
   { href: "/winkel", label: "De winkel" },
@@ -69,6 +70,7 @@ export default function Navbar() {
               </Link>
             );
           })}
+          {WEBSHOP_OPEN && (
           <button
             onClick={openDrawer}
             aria-label={`Winkelwagen openen (${bagCount} ${bagCount === 1 ? "zak" : "zakken"})`}
@@ -81,6 +83,7 @@ export default function Navbar() {
               </span>
             )}
           </button>
+          )}
           <Link
             href="/winkel"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
@@ -91,6 +94,7 @@ export default function Navbar() {
 
         {/* Mobiel: winkelwagen + hamburger */}
         <div className="md:hidden flex items-center gap-1">
+          {WEBSHOP_OPEN && (
           <button
             onClick={openDrawer}
             aria-label={`Winkelwagen openen (${bagCount} ${bagCount === 1 ? "zak" : "zakken"})`}
@@ -103,6 +107,7 @@ export default function Navbar() {
               </span>
             )}
           </button>
+          )}
           <button
             onClick={() => setOpen(!open)}
             className="relative w-10 h-10 flex flex-col items-center justify-center gap-[5px]"

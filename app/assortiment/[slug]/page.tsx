@@ -14,6 +14,7 @@ import {
   BAG_PRICE,
   BAG_SIZE,
   BUNDLES,
+  WEBSHOP_OPEN,
 } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -148,20 +149,42 @@ export default async function CoffeeDetailPage({
                 ))}
               </div>
               <p className="text-xs text-espresso-400 mt-5 text-center">
-                Bundelprijs geldt bij afhalen in de winkel. Verzenden kan ook:
-                €15 per zak plus PostNL-verzendkosten.
+                {WEBSHOP_OPEN
+                  ? "Bundelprijs geldt bij afhalen in de winkel. Verzenden kan ook: €15 per zak plus PostNL-verzendkosten."
+                  : "Alle koffie is af te halen in de winkel, gratis gemalen op jouw zetmethode."}
               </p>
             </div>
 
-            <AddToCart slug={coffee.slug} />
-
-            <Link
-              href="/winkel"
-              className="group mt-6 inline-flex items-center gap-2 text-sm text-espresso-500 hover:text-sage-700 transition-colors"
-            >
-              <PinIcon className="w-4 h-4" />
-              Liever eerst proeven? Kom langs in de winkel
-            </Link>
+            {WEBSHOP_OPEN ? (
+              <>
+                <AddToCart slug={coffee.slug} />
+                <Link
+                  href="/winkel"
+                  className="group mt-6 inline-flex items-center gap-2 text-sm text-espresso-500 hover:text-sage-700 transition-colors"
+                >
+                  <PinIcon className="w-4 h-4" />
+                  Liever eerst proeven? Kom langs in de winkel
+                </Link>
+              </>
+            ) : (
+              <div className="rounded-3xl bg-sage-100/70 border border-sage-200 p-6">
+                <p className="font-medium text-espresso-900 mb-1.5">
+                  Verkrijgbaar in de winkel
+                </p>
+                <p className="text-sm text-espresso-500 leading-relaxed mb-5">
+                  We leggen de laatste hand aan de webshop; online bestellen
+                  kan binnenkort. Tot die tijd staat deze koffie gewoon voor
+                  je klaar aan de Bergselaan.
+                </p>
+                <Link
+                  href="/winkel"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 bg-sage-700 text-paper-100 text-sm font-medium rounded-full hover:bg-sage-800 transition-colors"
+                >
+                  <PinIcon className="w-4 h-4" />
+                  Bezoek de winkel
+                </Link>
+              </div>
+            )}
 
             {/* Specificaties */}
             <dl className="mt-10 border-t border-espresso-900/10">

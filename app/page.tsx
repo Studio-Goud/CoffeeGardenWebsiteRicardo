@@ -13,7 +13,7 @@ import {
   BeanIllustration,
   Squiggle,
 } from "@/components/Illustrations";
-import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES } from "@/lib/products";
+import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES, WEBSHOP_OPEN } from "@/lib/products";
 
 const categories = [
   {
@@ -452,8 +452,9 @@ export default function HomePage() {
                 </div>
               ))}
               <p className="pt-5 border-t border-espresso-900/8 text-xs text-espresso-400 text-center">
-                Bundelprijzen gelden bij afhalen in de winkel. Verzenden kan ook:
-                €15 per zak plus PostNL-verzendkosten.
+                {WEBSHOP_OPEN
+                  ? "Bundelprijzen gelden bij afhalen in de winkel. Verzenden kan ook: €15 per zak plus PostNL-verzendkosten."
+                  : "Alle koffiezakken zijn af te halen in de winkel. Online bestellen kan binnenkort."}
               </p>
             </div>
           </Reveal>

@@ -23,6 +23,14 @@ export const BAG_SIZE = "500 gr";
 export const BAG_PRICE = 15;
 
 /**
+ * Webshop-schakelaar. Op false kan er niet online besteld worden:
+ * geen winkelwagen, geen afrekenen, geen betalingen; de site toont
+ * overal dat alles af te halen is in de winkel. Zet op true zodra
+ * de webshop open mag.
+ */
+export const WEBSHOP_OPEN = false;
+
+/**
  * Staffelprijzen in euro's (zelfde als op het bord in de winkel).
  * De bundelkorting geldt alleen bij afhalen in de winkel.
  */

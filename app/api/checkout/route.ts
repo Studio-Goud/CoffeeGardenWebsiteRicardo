@@ -4,6 +4,7 @@ import {
   pickupTotal,
   shippingTotal,
   GRINDS,
+  WEBSHOP_OPEN,
   type Grind,
 } from "@/lib/products";
 
@@ -38,6 +39,9 @@ interface CheckoutBody {
 const SITE_URL = process.env.SITE_URL ?? "https://www.coffeegarden.nl";
 
 export async function POST(req: Request) {
+  if (!WEBSHOP_OPEN) {
+    return NextResponse.json({ error: "webshop_closed" }, { status: 503 });
+  }
   const apiKey = process.env.MOLLIE_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });

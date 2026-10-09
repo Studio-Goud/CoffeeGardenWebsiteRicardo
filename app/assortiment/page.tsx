@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import { ArrowIcon, PinIcon } from "@/components/Icons";
+import { ArrowIcon, PinIcon, ClockIcon } from "@/components/Icons";
 import {
   TeaIllustration,
   MatchaIllustration,
   ChaiIllustration,
 } from "@/components/Illustrations";
-import { coffees, BAG_PRICE, BAG_SIZE, type Coffee } from "@/lib/products";
+import { coffees, BAG_PRICE, BAG_SIZE, WEBSHOP_OPEN, type Coffee } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Assortiment",
@@ -67,7 +67,7 @@ async function AssortimentContent({
       <section className="pt-36 md:pt-44 pb-16 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto">
           <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-5">
-            Assortiment
+            Webshop
           </p>
           <h1 className="font-display text-5xl md:text-7xl tracking-tight text-espresso-900 leading-[0.98] mb-6">
             Onze <em className="display-italic text-sage-600">koffies</em>
@@ -77,6 +77,15 @@ async function AssortimentContent({
             single origins en {blends.length} huisblends. In de winkel vind je
             daarnaast thee, matcha, chai en lokale lekkernijen.
           </p>
+          {!WEBSHOP_OPEN && (
+            <div className="mt-8 inline-flex items-start sm:items-center gap-3 rounded-2xl bg-sage-100/70 border border-sage-200 px-5 py-4 max-w-lg">
+              <ClockIcon className="w-5 h-5 text-sage-700 shrink-0 mt-0.5 sm:mt-0" />
+              <p className="text-sm text-espresso-600 leading-relaxed">
+                We leggen de laatste hand aan de webshop. Online bestellen kan
+                binnenkort; tot die tijd is alles af te halen in de winkel.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
