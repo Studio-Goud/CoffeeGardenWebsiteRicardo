@@ -32,6 +32,7 @@ export default function AfrekenenPage() {
     opmerking: "",
   });
   const [verstuurd, setVerstuurd] = useState(false);
+  const [bezig, setBezig] = useState(false);
 
   const subtotaalLos = bagCount * BAG_PRICE;
   const totaal =
@@ -47,7 +48,40 @@ export default function AfrekenenPage() {
     (fulfilment === "afhalen" ||
       (form.straat.trim() !== "" && form.postcode.trim() !== "" && form.plaats.trim() !== ""));
 
-  function bestel() {
+  async function bestel() {
+    setBezig(true);
+
+    // Eerst online betalen via Mollie proberen (iDEAL e.d.)
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({ slug: i.slug, grind: i.grind, qty: i.qty })),
+          fulfilment,
+          naam: form.naam,
+          email: form.email,
+          telefoon: form.telefoon,
+          straat: form.straat,
+          postcode: form.postcode,
+          plaats: form.plaats,
+          opmerking: form.opmerking,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.checkoutUrl) {
+          // Wagen pas leegmaken op de bedankt-pagina, ná de betaling
+          window.location.href = data.checkoutUrl;
+          return;
+        }
+      }
+    } catch {
+      // Betaalroute niet bereikbaar: val hieronder terug op e-mail
+    }
+    setBezig(false);
+
+    // Terugval: bestelling per e-mail (betalen bij afhalen of via verzoek)
     const regels = items
       .map((i) => {
         const c = getCoffeeBySlug(i.slug);
@@ -276,16 +310,17 @@ export default function AfrekenenPage() {
 
               <button
                 onClick={bestel}
-                disabled={!compleet}
+                disabled={!compleet || bezig}
                 className="group mt-6 w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Bestelling versturen
+                {bezig ? "Even geduld..." : "Afrekenen"}
                 <ArrowIcon className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
               <p className="text-xs text-espresso-400 mt-4 leading-relaxed">
-                Je bestelling gaat per e-mail naar de winkel; wij bevestigen
-                &apos;m persoonlijk. Betalen kan bij het afhalen (pin of
-                contant) of via een betaalverzoek bij verzending.
+                Je rekent veilig af via Mollie, onder andere met iDEAL. Lukt
+                online betalen even niet, dan sturen we je bestelling per
+                e-mail naar de winkel en betaal je bij het afhalen (pin of
+                contant) of via een betaalverzoek.
               </p>
             </div>
           </aside>
