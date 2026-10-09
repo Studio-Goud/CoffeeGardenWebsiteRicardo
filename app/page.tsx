@@ -465,6 +465,16 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal className="mt-12 text-center">
+            <Link
+              href="/cadeaus"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
+            >
+              Alle cadeaus &amp; prijzen
+              <ArrowIcon className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 

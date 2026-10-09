@@ -5,6 +5,7 @@ import { BranchIllustration } from "./Illustrations";
 
 const nav = [
   { href: "/assortiment", label: "Assortiment" },
+  { href: "/cadeaus", label: "Cadeaus & accessoires" },
   { href: "/workshops", label: "Workshops & high tea" },
   { href: "/winkel", label: "De winkel" },
 ];
