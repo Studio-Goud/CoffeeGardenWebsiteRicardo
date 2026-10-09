@@ -127,8 +127,8 @@ export const coffees: Coffee[] = [
     description:
       "Een van de meest gevierde origins ter wereld. De Sidama-regio in zuidelijk Ethiopië levert bonen met een sprekend, parfumachtig karakter: bloemig, met heldere citrustonen en een fluweelzachte honing-zoetheid in de afdronk. Licht gebrand zodat de origin alle ruimte krijgt.",
     brewing: "Perfect als filter (V60, Chemex) of als single-origin espresso.",
-    image: "/products/ethiopia-yirgacheffe.png",
-    thumb: "/products/ethiopia-yirgacheffe-thumb.png",
+    image: "/products/ethiopia-yirgacheffe-bag.jpg",
+    thumb: "/products/ethiopia-yirgacheffe-bag-thumb.jpg",
   },
   {
     slug: "colombia-supremo",
@@ -143,8 +143,8 @@ export const coffees: Coffee[] = [
     description:
       "Klassiek Colombiaans uit de Huila-regio. Zachte noten van walnoot en hazelnoot, een lichte zoetheid van rood fruit en een rond chocoladelichaam. Medium gebrand voor een vol en uitgebalanceerd kopje, dag in dag uit.",
     brewing: "Sterke allrounder: filter, French press of espresso.",
-    image: "/products/colombia-supremo.png",
-    thumb: "/products/colombia-supremo-thumb.png",
+    image: "/products/colombia-supremo-bag.jpg",
+    thumb: "/products/colombia-supremo-bag-thumb.jpg",
   },
   {
     slug: "peru-cajamarca",
@@ -159,8 +159,8 @@ export const coffees: Coffee[] = [
     description:
       "Biologisch gecertificeerd uit de hooglanden van Cajamarca. Een diepe, romige body met karamel-zoetheid, cacao en zachte notentonen. Schone afdronk, ideaal voor wie houdt van een rustig maar vol kopje.",
     brewing: "Mooi als latte of cappuccino, laat de melk z'n karamel binden.",
-    image: "/products/peru-cajamarca.png",
-    thumb: "/products/peru-cajamarca-thumb.png",
+    image: "/products/peru-cajamarca-bag.jpg",
+    thumb: "/products/peru-cajamarca-bag-thumb.jpg",
     bio: true,
   },
   {
@@ -176,8 +176,8 @@ export const coffees: Coffee[] = [
     description:
       "Biologisch en fair-trade uit de Chiapas-regio in Mexico. Een gulle, melkchocolade-rijke smaak met bruine suiker en geroosterde amandel. Een van onze meest geliefde dagelijkse koffies: vriendelijk, vol en eerlijk.",
     brewing: "Heerlijk als espresso of in een AeroPress.",
-    image: "/products/casa-del-pueblo.png",
-    thumb: "/products/casa-del-pueblo-thumb.png",
+    image: "/products/casa-del-pueblo-bag.jpg",
+    thumb: "/products/casa-del-pueblo-bag-thumb.jpg",
     bio: true,
   },
   {

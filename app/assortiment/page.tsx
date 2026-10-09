@@ -33,7 +33,7 @@ const inStoreCategories = [
   {
     id: "chai",
     label: "Chai",
-    desc: "Authentieke masala chai blends met echte kruiden, huisgemengd.",
+    desc: "David Rio chai in drie smaken: Tiger Spice, Tortoise Green Tea en Flamingo Vanilla (decaf).",
     Illustration: ChaiIllustration,
   },
 ] as const;

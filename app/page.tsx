@@ -36,7 +36,7 @@ const categories = [
   },
   {
     title: "Chai",
-    subtitle: "Authentieke masala chai blends, huisgemengd met echte kruiden.",
+    subtitle: "David Rio chai: Tiger Spice, Tortoise Green Tea en Flamingo Vanilla (decaf).",
     href: "/assortiment?categorie=chai",
     Illustration: ChaiIllustration,
   },
