@@ -9,7 +9,7 @@ import {
   MatchaIllustration,
   ChaiIllustration,
 } from "@/components/Illustrations";
-import { coffees, BAG_PRICE, BAG_SIZE, WEBSHOP_OPEN, type Coffee } from "@/lib/products";
+import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES, WEBSHOP_OPEN, type Coffee } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Assortiment",
@@ -86,6 +86,30 @@ async function AssortimentContent({
               </p>
             </div>
           )}
+
+          {/* Staffelprijzen, prominent bovenaan de webshop */}
+          <div className="relative mt-10 max-w-2xl">
+            <span className="absolute -top-11 right-0 sm:-top-4 sm:-right-4 rotate-[7deg] z-10 inline-flex items-center justify-center w-18 h-18 rounded-full bg-clay-500 text-paper-50 text-center text-[10px] font-semibold uppercase tracking-wider leading-tight shadow-lg shadow-clay-600/30">
+              bundel-<br />voordeel!
+            </span>
+            <div className="grid grid-cols-3 rounded-3xl bg-paper-50 border border-espresso-900/8 divide-x divide-espresso-900/8 shadow-sm rotate-[0.4deg]">
+              {BUNDLES.map((b) => (
+                <div key={b.qty} className="px-3 py-5 text-center">
+                  <p className="font-display text-2xl sm:text-3xl text-espresso-900 tabular-nums">
+                    €{b.price},-
+                  </p>
+                  <p className="text-[11px] sm:text-xs text-espresso-400 mt-1">
+                    {b.label} à 500 gr
+                  </p>
+                  {b.qty * BAG_PRICE > b.price && (
+                    <p className="text-[11px] font-medium text-clay-600 mt-0.5">
+                      bespaar €{b.qty * BAG_PRICE - b.price},-
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -246,6 +270,11 @@ function CoffeeSection({
                     </span>
                     <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-sage-600" />
                   </div>
+                  <p className="mt-2 text-[11px] font-medium text-clay-600">
+                    {BUNDLES.filter((b) => b.qty > 1)
+                      .map((b) => `${b.label} €${b.price},-`)
+                      .join(" · ")}
+                  </p>
                 </div>
               </Link>
             </div>

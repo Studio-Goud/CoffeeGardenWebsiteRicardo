@@ -397,6 +397,11 @@ export default function HomePage() {
                         <span className="font-semibold">€{BAG_PRICE},-</span>
                       </p>
                     </div>
+                    <p className="mt-2 text-[11px] font-medium text-clay-600">
+                      {BUNDLES.filter((b) => b.qty > 1)
+                        .map((b) => `${b.label} €${b.price},-`)
+                        .join(" · ")}
+                    </p>
                   </div>
                 </Link>
               </div>
