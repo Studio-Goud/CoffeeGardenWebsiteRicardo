@@ -18,7 +18,7 @@ import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES, WEBSHOP_OPEN } from "@/lib/produ
 const categories = [
   {
     title: "Koffiebonen",
-    subtitle: "14 eigen koffies: single origins, huisblends en een decaf, vers gebrand.",
+    subtitle: `${coffees.length} eigen koffies: single origins, huisblends en een decaf, vers gebrand.`,
     href: "/assortiment",
     Illustration: CupIllustration,
   },
@@ -63,7 +63,7 @@ const marqueeItems = [
 ];
 
 // Uitgelichte koffies op de homepage: één van elk karakter
-const featured = ["ethiopia-yirgacheffe", "fleur-de-miel", "brasil-cerrado"]
+const featured = ["ethiopia-yirgacheffe", "fleur-de-miel", "colombia-huila-decaf"]
   .map((slug) => coffees.find((c) => c.slug === slug)!)
   .filter(Boolean);
 
@@ -245,7 +245,7 @@ export default function HomePage() {
 
             <dl className="grid grid-cols-3 gap-6 max-w-md border-t border-espresso-900/10 pt-8">
               {[
-                { value: "14", label: "Eigen koffies" },
+                { value: `${coffees.length}`, label: "Eigen koffies" },
                 { value: "30+", label: "Theevariëteiten" },
                 { value: "7/7", label: "Dagen per week open" },
               ].map((s) => (
@@ -349,14 +349,14 @@ export default function HomePage() {
               href="/assortiment"
               className="group inline-flex items-center gap-2 text-sm font-medium text-espresso-700 hover:text-sage-700 transition-colors mt-6 md:mt-0"
             >
-              Alle 14 koffies
+              Alle koffies
               <ArrowIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((coffee, i) => (
-              <Reveal key={coffee.slug} delay={i * 120}>
+              <Reveal key={coffee.slug} delay={i * 120} className="snap-start shrink-0 w-[72%] sm:w-auto sm:shrink">
                 <Link
                   href={`/assortiment/${coffee.slug}`}
                   className="group block bg-paper-50 rounded-3xl overflow-hidden border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 transition-all duration-500"

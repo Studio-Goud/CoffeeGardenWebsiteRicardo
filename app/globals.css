@@ -153,3 +153,12 @@ body {
   font-style: italic;
   font-variation-settings: "SOFT" 60, "WONK" 1;
 }
+
+/* Swipebare productrijen op mobiel: scrollbar verbergen */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

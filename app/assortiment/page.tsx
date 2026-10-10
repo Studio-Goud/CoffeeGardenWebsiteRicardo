@@ -14,7 +14,7 @@ import { coffees, BAG_PRICE, BAG_SIZE, WEBSHOP_OPEN, type Coffee } from "@/lib/p
 export const metadata: Metadata = {
   title: "Assortiment",
   description:
-    "14 eigen koffies (single origins, huisblends en een decaf) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
+    "Onze eigen koffies (single origins, huisblends en een decaf) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
 };
 
 const inStoreCategories = [
@@ -196,9 +196,9 @@ function CoffeeSection({
           <p className="text-sm text-espresso-400">{subtitle}</p>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-4">
           {coffees.map((c, i) => (
-            <Reveal key={c.slug} delay={(i % 4) * 90}>
+            <Reveal key={c.slug} delay={(i % 4) * 90} className="snap-start shrink-0 w-[72%] sm:w-auto sm:shrink">
               <Link
                 href={`/assortiment/${c.slug}`}
                 className="group block h-full rounded-3xl overflow-hidden border transition-all duration-500 bg-paper-50 border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5"

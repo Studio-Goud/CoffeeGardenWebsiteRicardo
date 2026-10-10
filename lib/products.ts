@@ -101,6 +101,8 @@ export interface Coffee {
   bio?: boolean;
   huisblend?: boolean;
   decaf?: boolean;
+  /** Nog geen zakfoto: koffie blijft van de site tot de foto er is. */
+  fotoVolgt?: boolean;
 }
 
 const NL_ROAST: Record<RoastLevel, string> = {
@@ -122,7 +124,7 @@ export function categoryLabel(coffee: Coffee): string {
   return "Huisblend";
 }
 
-export const coffees: Coffee[] = [
+const ALLE_KOFFIES: Coffee[] = [
   // ─── Single Origins ────────────────────────────────────────────────────
   {
     slug: "ethiopia-yirgacheffe",
@@ -209,6 +211,7 @@ export const coffees: Coffee[] = [
   },
   {
     slug: "brasil-cerrado",
+    fotoVolgt: true,
     name: "Brasil Cerrado",
     type: "single-origin",
     origin: "Brazilië · Minas Gerais",
@@ -285,6 +288,7 @@ export const coffees: Coffee[] = [
   },
   {
     slug: "velours",
+    fotoVolgt: true,
     name: "Velours",
     type: "espresso-blend",
     origin: "Fluwelig & diep",
@@ -299,6 +303,7 @@ export const coffees: Coffee[] = [
   },
   {
     slug: "magnifico",
+    fotoVolgt: true,
     name: "Magnifico",
     type: "espresso-blend",
     origin: "Romig & klassiek",
@@ -340,6 +345,12 @@ export const coffees: Coffee[] = [
     thumb: "/products/bellissimo-bag-thumb.jpg",
   },
 ];
+
+/**
+ * Alleen koffies met een echte zakfoto staan op de site. Zodra er een
+ * foto is: fotoVolgt-vlag bij die koffie weghalen en hij doet weer mee.
+ */
+export const coffees: Coffee[] = ALLE_KOFFIES.filter((c) => !c.fotoVolgt);
 
 export function getCoffeeBySlug(slug: string): Coffee | undefined {
   return coffees.find((c) => c.slug === slug);
