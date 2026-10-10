@@ -198,7 +198,7 @@ function CoffeeSection({
 
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-4">
           {coffees.map((c, i) => (
-            <Reveal key={c.slug} delay={(i % 4) * 90} className="snap-start snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
+            <div key={c.slug} className="snap-center snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
               <Link
                 href={`/assortiment/${c.slug}`}
                 className="group block h-full rounded-3xl overflow-hidden border transition-all duration-500 bg-paper-50 border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5"
@@ -248,7 +248,7 @@ function CoffeeSection({
                   </div>
                 </div>
               </Link>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
