@@ -10,7 +10,6 @@ import { WEBSHOP_OPEN } from "@/lib/products";
 
 const links = [
   { href: "/assortiment", label: "Webshop" },
-  { href: "/cadeaus", label: "Cadeaus" },
   { href: "/workshops", label: "Workshops" },
   { href: "/winkel", label: "De winkel" },
 ];

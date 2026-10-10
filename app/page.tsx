@@ -512,7 +512,7 @@ export default function HomePage() {
 
           <Reveal className="mt-12 text-center">
             <Link
-              href="/cadeaus"
+              href="/assortiment#cadeaus"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
             >
               Alle cadeaus &amp; prijzen

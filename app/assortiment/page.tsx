@@ -10,11 +10,12 @@ import {
   ChaiIllustration,
 } from "@/components/Illustrations";
 import { coffees, BAG_PRICE, BAG_SIZE, BUNDLES, WEBSHOP_OPEN, type Coffee } from "@/lib/products";
+import CadeausSecties from "@/components/shop/CadeausSecties";
 
 export const metadata: Metadata = {
-  title: "Assortiment",
+  title: "Webshop",
   description:
-    "Onze eigen koffies (single origins, huisblends en een decaf) plus thee, matcha en chai. Bekijk het volledige assortiment van Coffee Garden Rotterdam.",
+    "De complete webshop van Coffee Garden Rotterdam: eigen koffies, David Rio chai, Delfts blauw, tulpenservies, thermoflessen, tote bags, blikken en honing van de imker.",
 };
 
 const inStoreCategories = [
@@ -74,8 +75,9 @@ async function AssortimentContent({
           </h1>
           <p className="text-espresso-500 leading-relaxed max-w-lg">
             {coffees.length} eigen koffies, vers gebrand: {singleOrigins.length}{" "}
-            single origins en {blends.length} huisblends. In de winkel vind je
-            daarnaast thee, matcha, chai en lokale lekkernijen.
+            single origins en {blends.length} huisblends. Scroll door voor de
+            rest van het schap: chai, Delfts blauw, servies, blikken en honing
+            van de imker, alles op deze ene pagina.
           </p>
           {!WEBSHOP_OPEN && (
             <div className="mt-8 inline-flex items-start sm:items-center gap-3 rounded-2xl bg-sage-100/70 border border-sage-200 px-5 py-4 max-w-lg">
@@ -186,6 +188,8 @@ async function AssortimentContent({
           </div>
         </div>
       </section>
+
+      <CadeausSecties />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/cart/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import HoningNudge from "@/components/cart/HoningNudge";
 import { WEBSHOP_OPEN } from "@/lib/products";
 
 const inter = Inter({
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1">{children}</main>
           <Footer />
           {WEBSHOP_OPEN && <CartDrawer />}
+          {WEBSHOP_OPEN && <HoningNudge />}
         </CartProvider>
       </body>
     </html>

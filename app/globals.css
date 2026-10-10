@@ -162,3 +162,15 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Honing-nudge: rustig omhoog zweven */
+@keyframes nudge-in {
+  from { opacity: 0; transform: translateY(18px) rotate(-0.6deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+.animate-nudge-in {
+  animation: nudge-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-nudge-in { animation: none; }
+}
