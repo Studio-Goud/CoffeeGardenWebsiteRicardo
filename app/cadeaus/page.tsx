@@ -8,7 +8,7 @@ import { Squiggle } from "@/components/Illustrations";
 export const metadata: Metadata = {
   title: "Cadeaus & accessoires",
   description:
-    "Cadeaus en accessoires van Coffee Garden Rotterdam: David Rio chai, losse thee, Delfts blauw, tulpenservies, thermoflessen, tote bags en Rotterdam-souvenirs.",
+    "Cadeaus en accessoires van Coffee Garden Rotterdam: David Rio chai, losse thee, Delfts blauw, tulpenservies, thermoflessen, tote bags, Rotterdam-souvenirs en honing en bijenwaskaarsen van de imker.",
 };
 
 function euro(n: number): string {
@@ -185,6 +185,57 @@ const blikken: Product[] = [
   },
 ];
 
+/** Honing & bijenwas van de imker: naam, korte omschrijving, prijs. */
+const honingGroepen: Array<{
+  titel: string;
+  sub?: string;
+  items: Array<[string, string, string]>;
+}> = [
+  {
+    titel: "Honing",
+    sub: "alle potten 250 gram",
+    items: [
+      ["Bloemen crèmehoning", "Nederlands, romig en smeerbaar", "€7,95"],
+      ["Fruithoning", "Nederlands, zacht en fruitig", "€7,95"],
+      ["Lindehoning", "Nederlands, fris en bloemig", "€7,95"],
+      ["Biesboschhoning", "uit de regio", "€6,95"],
+      ["Acaciahoning", "vloeibaar en mild", "€8,45"],
+      ["Kastanjehoning", "donker en licht bitter, heerlijk bij koffie", "€8,45"],
+      ["Oranjebloesemhoning", "zoet en aromatisch", "€7,45"],
+    ],
+  },
+  {
+    titel: "Koek & snoep",
+    items: [
+      ["Honingkoek", "500 gram, voorgesneden", "€4,45"],
+      ["Honingkoek met kandij", "500 gram", "€6,95"],
+      ["Honingwafels", "6 stuks", "€4,45"],
+      ["Gemengde honingsnoep", "120 gram, drie smaken", "€3,45"],
+      ["Melk & honing snoepjes", "100 gram, romig gevuld", "€3,45"],
+      ["Duindoorn honingsnoep", "100 gram, met vitamine C", "€3,45"],
+      ["Honinglolly's", "8 stuks", "€4,45"],
+      ["Honingdrop", "150 gram, gemengd", "€4,45"],
+    ],
+  },
+  {
+    titel: "Kaarsen",
+    sub: "van pure bijenwas",
+    items: [
+      ["Bijenkorfkaars", "klassieke korfvorm", "€6,95"],
+      ["Bijenkorfkaars groot", "met bijtjes", "€12,95"],
+      ["Koninginnebij", "kaars in bijenvorm", "€4,45"],
+      ["Piramidekaars", "met bij", "€5,45"],
+      ["Stompkaars", "touwstructuur en bijtjes", "€6,45"],
+      ["Bolkaars", "touwstructuur en bijtjes", "€9,95"],
+      ["Raatkaars groot", "gegoten honingraat", "€9,95"],
+      ["Dinerkaarsen", "2 stuks, gerold", "€7,45"],
+      ["Waxinelichtjes hartje", "6 stuks", "€6,95"],
+      ["Waxinelichtjes", "18 stuks, zuivere bijenwas", "€19,95"],
+      ["Kerstboomkaarsjes", "20 stuks", "€19,95"],
+    ],
+  },
+];
+
 export default function CadeausPage() {
   return (
     <div className="grain bg-paper-100">
@@ -242,6 +293,62 @@ export default function CadeausPage() {
         intro="Blikken waar eerst iets lekkers in zit, en daarna jarenlang van alles. Typisch Hollands cadeau om te versturen of mee te nemen."
         producten={blikken}
       />
+
+      {/* ─── Honing & bijenwas, van de imker ──────────────────── */}
+      <section className="grain px-5 sm:px-8 py-20 bg-sage-100/60">
+        <div className="max-w-6xl mx-auto">
+          <Reveal className="mb-12 max-w-xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-3">
+              Vers van de imker
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl tracking-tight text-espresso-900 mb-4">
+              Honing &amp; bijenwas
+            </h2>
+            <p className="text-sm text-espresso-500 leading-relaxed">
+              Ambachtelijke honing en pure bijenwaskaarsen, rechtstreeks van de
+              imker. Om zelf van te genieten of cadeau te doen, en alleen af te
+              halen in de winkel.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {honingGroepen.map((g, gi) => (
+              <Reveal key={g.titel} delay={gi * 100}>
+                <div
+                  className={`h-full rounded-3xl bg-paper-50 border border-espresso-900/8 p-7 ${
+                    gi % 2 === 0 ? "md:-rotate-[0.4deg]" : "md:rotate-[0.4deg]"
+                  }`}
+                >
+                  <h3 className="font-display text-2xl text-espresso-900 mb-1">
+                    {g.titel}
+                  </h3>
+                  {g.sub && (
+                    <p className="text-xs text-espresso-400 mb-4">{g.sub}</p>
+                  )}
+                  <ul className={g.sub ? "" : "mt-4"}>
+                    {g.items.map(([naam, sub, prijs], i) => (
+                      <li
+                        key={naam}
+                        className={`py-2.5 ${i > 0 ? "border-t border-espresso-900/6" : ""}`}
+                      >
+                        <div className="flex items-baseline justify-between gap-4 text-sm">
+                          <span className="text-espresso-700 font-medium">{naam}</span>
+                          <span className="font-semibold text-espresso-900 tabular-nums whitespace-nowrap">
+                            {prijs}
+                          </span>
+                        </div>
+                        {sub && (
+                          <p className="text-xs text-espresso-400 mt-0.5">{sub}</p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="px-5 sm:px-8 pb-28">
