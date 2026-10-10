@@ -28,7 +28,7 @@ export const BAG_PRICE = 15;
  * overal dat alles af te halen is in de winkel. Zet op true zodra
  * de webshop open mag.
  */
-export const WEBSHOP_OPEN = false;
+export const WEBSHOP_OPEN = true;
 
 /**
  * Staffelprijzen in euro's (zelfde als op het bord in de winkel).
