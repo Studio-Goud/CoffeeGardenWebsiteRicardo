@@ -438,9 +438,9 @@ function ProductSectie({
           <p className="text-sm text-espresso-500 leading-relaxed">{intro}</p>
         </Reveal>
 
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
           {producten.map((p, i) => (
-            <Reveal key={p.naam} delay={(i % 3) * 100} className="snap-start shrink-0 w-[72%] sm:w-auto sm:shrink">
+            <Reveal key={p.naam} delay={(i % 3) * 100} className="snap-start snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
               <div
                 className={`group h-full flex flex-col rounded-3xl bg-paper-50 border border-espresso-900/8 overflow-hidden hover:shadow-xl hover:shadow-espresso-900/5 hover:-translate-y-1 transition-all duration-500 ${
                   i % 2 === 0 ? "md:-rotate-[0.5deg]" : "md:rotate-[0.5deg]"

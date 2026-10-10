@@ -354,9 +354,9 @@ export default function HomePage() {
             </Link>
           </Reveal>
 
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((coffee, i) => (
-              <Reveal key={coffee.slug} delay={i * 120} className="snap-start shrink-0 w-[72%] sm:w-auto sm:shrink">
+              <Reveal key={coffee.slug} delay={i * 120} className="snap-start snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
                 <Link
                   href={`/assortiment/${coffee.slug}`}
                   className="group block bg-paper-50 rounded-3xl overflow-hidden border border-espresso-900/8 hover:border-sage-400/60 hover:shadow-xl hover:shadow-espresso-900/5 transition-all duration-500"
