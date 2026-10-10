@@ -3,17 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { ArrowIcon, PinIcon, SparkIcon } from "@/components/Icons";
-import {
-  Squiggle,
-  MatchaIllustration,
-  TeaIllustration,
-  CupIllustration,
-} from "@/components/Illustrations";
+import { Squiggle } from "@/components/Illustrations";
 
 export const metadata: Metadata = {
   title: "Cadeaus & accessoires",
   description:
-    "Cadeaus en accessoires van Coffee Garden Rotterdam: Matcha League matcha, David Rio chai, losse thee, Delfts blauw, tulpenservies, thermoflessen, tote bags en Rotterdam-souvenirs.",
+    "Cadeaus en accessoires van Coffee Garden Rotterdam: David Rio chai, losse thee, Delfts blauw, tulpenservies, thermoflessen, tote bags en Rotterdam-souvenirs.",
 };
 
 function euro(n: number): string {
@@ -211,65 +206,6 @@ export default function CadeausPage() {
         </div>
       </section>
 
-      {/* ─── Matcha, van Matcha League ────────────────────────── */}
-      <section className="px-5 sm:px-8 pb-20">
-        <div className="max-w-6xl mx-auto">
-          <Reveal>
-            <div className="rounded-[2rem] bg-sage-100/70 border border-sage-200 overflow-hidden md:grid md:grid-cols-12">
-              <div className="md:col-span-7 p-9 md:p-12">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-4">
-                  Matcha League
-                </p>
-                <h2 className="font-display text-3xl md:text-4xl text-espresso-900 mb-4">
-                  Onze <em className="display-italic text-sage-600">matcha</em>
-                </h2>
-                <p className="text-sm text-espresso-600 leading-relaxed mb-4 max-w-md">
-                  De matcha die we in de winkel schenken en verkopen komt van
-                  Matcha League: ceremoniële kwaliteit, fijngemalen en fel
-                  groen. Dezelfde matcha als in onze iced matcha aan de
-                  plantenwand.
-                </p>
-                <p className="text-sm text-espresso-600 leading-relaxed mb-8 max-w-md">
-                  Thuis kloppen doe je met een bamboe whisk in een echte bowl.
-                  We verkopen alles los, maar de complete set is het leukste
-                  begin (en het voordeligst).
-                </p>
-                <ul className="max-w-md">
-                  {(
-                    [
-                      ["Matcha poeder", 19.95],
-                      ["Matcha bowl", 14.95],
-                      ["Whisk (bamboe klopper)", 7.95],
-                      ["Whisk-houder", 6.95],
-                      ["Bowl + houder", 19.95],
-                      ["Complete set: bowl + houder + whisk", 24.95],
-                    ] as Array<[string, number]>
-                  ).map(([naam, prijs], i) => (
-                    <li
-                      key={naam}
-                      className={`flex items-baseline justify-between gap-4 py-2.5 text-sm ${
-                        i > 0 ? "border-t border-sage-200" : ""
-                      }`}
-                    >
-                      <span className="text-espresso-600">{naam}</span>
-                      <span className="font-semibold text-espresso-900 tabular-nums whitespace-nowrap">
-                        {euro(prijs)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="md:col-span-5 relative bg-sage-200/50 flex items-center justify-center p-10 min-h-64">
-                <MatchaIllustration draw className="w-40 md:w-52 text-sage-700" />
-                <span className="absolute top-6 right-6 rotate-[6deg] inline-flex items-center justify-center w-24 h-24 rounded-full bg-clay-500 text-paper-50 text-center text-[11px] font-semibold uppercase tracking-wider leading-tight shadow-lg shadow-clay-600/30">
-                  klop &apos;m<br />thuis
-                </span>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <ProductSectie
         eyebrow="David Rio, San Francisco"
         titel="Chai voor thuis"
@@ -306,80 +242,6 @@ export default function CadeausPage() {
         intro="Blikken waar eerst iets lekkers in zit, en daarna jarenlang van alles. Typisch Hollands cadeau om te versturen of mee te nemen."
         producten={blikken}
       />
-
-      {/* ─── Barista & kleine cadeaus ─────────────────────────── */}
-      <section className="px-5 sm:px-8 pb-20">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
-          <Reveal>
-            <div className="h-full rounded-3xl bg-paper-50 border border-espresso-900/8 p-8 md:-rotate-[0.4deg]">
-              <CupIllustration className="w-16 h-16 text-sage-600 mb-5" />
-              <h2 className="font-display text-2xl text-espresso-900 mb-2">
-                Voor de thuisbarista
-              </h2>
-              <p className="text-sm text-espresso-500 leading-relaxed mb-5">
-                Zet je espresso thuis zoals wij dat in de winkel doen. Vraag
-                gerust om een demonstratie bij de machine.
-              </p>
-              <ul>
-                {(
-                  [
-                    ["Melkkan 350 ml", 9.95],
-                    ["Tamper", 11.95],
-                    ["Tamper + houder", 17.95],
-                  ] as Array<[string, number]>
-                ).map(([naam, prijs], i) => (
-                  <li
-                    key={naam}
-                    className={`flex items-baseline justify-between gap-4 py-2.5 text-sm ${
-                      i > 0 ? "border-t border-espresso-900/6" : ""
-                    }`}
-                  >
-                    <span className="text-espresso-600">{naam}</span>
-                    <span className="font-semibold text-espresso-900 tabular-nums">
-                      {euro(prijs)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="h-full rounded-3xl bg-paper-50 border border-espresso-900/8 p-8 md:rotate-[0.4deg]">
-              <TeaIllustration className="w-16 h-16 text-sage-600 mb-5" />
-              <h2 className="font-display text-2xl text-espresso-900 mb-2">
-                Kleine cadeaus
-              </h2>
-              <p className="text-sm text-espresso-500 leading-relaxed mb-5">
-                Voor de kids, voor bij de borrel, of gewoon omdat het kan.
-              </p>
-              <ul>
-                {(
-                  [
-                    ["Memory-kit voor kids", 7.95],
-                    ["Kaas-set (cheese cutlery)", 11.95],
-                  ] as Array<[string, number]>
-                ).map(([naam, prijs], i) => (
-                  <li
-                    key={naam}
-                    className={`flex items-baseline justify-between gap-4 py-2.5 text-sm ${
-                      i > 0 ? "border-t border-espresso-900/6" : ""
-                    }`}
-                  >
-                    <span className="text-espresso-600">{naam}</span>
-                    <span className="font-semibold text-espresso-900 tabular-nums">
-                      {euro(prijs)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-espresso-400 mt-5 leading-relaxed">
-                Niet alles past op deze pagina. In de winkel vind je nog meer,
-                van sleutelhangers tot granola van Leanne&apos;s Bakery.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="px-5 sm:px-8 pb-28">
