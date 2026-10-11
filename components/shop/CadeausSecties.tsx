@@ -3,11 +3,8 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { ArrowIcon, PinIcon, SparkIcon } from "@/components/Icons";
 import { Squiggle } from "@/components/Illustrations";
-
-
-function euro(n: number): string {
-  return `€${n.toFixed(2).replace(".", ",")}`;
-}
+import GiftKoopKnop from "@/components/cart/GiftKoopKnop";
+import { GIFTS, euro } from "@/lib/products";
 
 /** Productkaart met volledige foto, verhaaltje en prijs. */
 interface Product {
@@ -17,6 +14,8 @@ interface Product {
   img?: string;
   alt?: string;
   badge?: string;
+  /** Id in GIFTS: maakt het product bestelbaar. */
+  giftId?: string;
 }
 
 const chai: Product[] = [
@@ -26,6 +25,7 @@ const chai: Product[] = [
       "Dé klassieker van David Rio uit San Francisco: zwarte thee met warme specerijen, rijk en romig. Twee schepjes, hete melk erbij, klaar. Een bus is goed voor zo'n 14 koppen.",
     prijs: euro(14.95),
     img: "/cadeaus/chai-tiger.jpg",
+    giftId: "chai-tiger",
     alt: "Bus David Rio Tiger Spice Chai",
   },
   {
@@ -34,6 +34,7 @@ const chai: Product[] = [
       "Dezelfde romige chai, maar dan op basis van groene thee. Iets frisser en zachter dan de Tiger Spice, met dezelfde warme kruiden.",
     prijs: euro(14.95),
     img: "/cadeaus/chai-tortoise.jpg",
+    giftId: "chai-tortoise",
     alt: "Bus David Rio Tortoise Green Tea Chai",
   },
   {
@@ -42,6 +43,7 @@ const chai: Product[] = [
       "Chai met vanille, zonder cafeïne en zonder toegevoegde suiker. Voor wie 's avonds nog een warme kop wil zonder wakker te liggen.",
     prijs: euro(14.95),
     img: "/cadeaus/chai-flamingo.jpg",
+    giftId: "chai-flamingo",
     alt: "Bus David Rio Flamingo Vanilla Chai",
     badge: "Decaf",
   },
@@ -54,6 +56,7 @@ const delfts: Product[] = [
       "Een klassieke Delfts blauwe vaas met molen en bloemmotief, netjes in geschenkverpakking. Hét cadeau om mee naar het buitenland te nemen, of gewoon voor je eigen vensterbank.",
     prijs: `klein ${euro(12.95)} · groot ${euro(17.95)}`,
     img: "/cadeaus/delfts-vaas.jpg",
+    giftId: "delfts-vaas",
     alt: "Delfts blauwe vaas in geschenkverpakking",
   },
   {
@@ -62,6 +65,7 @@ const delfts: Product[] = [
       "Delfts blauw bloemmotief met een gouden oor en randje. Je ochtendkoffie smaakt er meteen een beetje feestelijker uit.",
     prijs: `klein ${euro(6.95)} · groot ${euro(10.95)}`,
     img: "/cadeaus/delfts-mok.jpg",
+    giftId: "delfts-mok",
     alt: "Delfts blauwe mok met gouden oor in geschenkdoos",
   },
   {
@@ -70,6 +74,7 @@ const delfts: Product[] = [
       "Met geschulpte rand en rijk bloemdecor. Voor de yoghurt met granola, het snoepgoed of gewoon mooi op tafel.",
     prijs: euro(10.95),
     img: "/cadeaus/delfts-kom.jpg",
+    giftId: "delfts-kom",
     alt: "Delfts blauwe kom met geschulpte rand",
   },
   {
@@ -78,6 +83,7 @@ const delfts: Product[] = [
       "Twee kleine strooiers vol Hollands blauw. Klein cadeau, groot effect op de eettafel.",
     prijs: euro(11.95),
     img: "/cadeaus/delfts-peper-zout.jpg",
+    giftId: "delfts-peper-zout",
     alt: "Delfts blauw peper- en zoutstel in doosje",
   },
 ];
@@ -89,6 +95,7 @@ const tulpen: Product[] = [
       "Botanische tulpen naar oude Hollandse prenten, afgemaakt met een goudkleurig oor. In een al even mooie geschenkdoos.",
     prijs: `klein ${euro(6.95)} · groot ${euro(10.95)}`,
     img: "/cadeaus/tulpen-mok.jpg",
+    giftId: "tulpen-mok",
     alt: "Tulpenmok met gouden oor in geschenkdoos",
   },
   {
@@ -97,6 +104,7 @@ const tulpen: Product[] = [
       "Een klein glaasje met gouden rand en tulpenprint. Voor het borreltje, of stiekem als espressokopje.",
     prijs: euro(3.95),
     img: "/cadeaus/tulpen-shotglas.jpg",
+    giftId: "tulpen-shotglas",
     alt: "Shotglaasje met tulpenprint en gouden rand",
   },
   {
@@ -105,6 +113,7 @@ const tulpen: Product[] = [
       "Zes onderzetters met wisselende tulpenprints en gouddruk. Beschermt de tafel en fleurt 'm tegelijk op.",
     prijs: euro(4.95),
     img: "/cadeaus/tulpen-onderzetters.jpg",
+    giftId: "tulpen-onderzetters",
     alt: "Set van zes onderzetters met tulpenprint",
   },
 ];
@@ -116,6 +125,7 @@ const onderweg: Product[] = [
       "Dubbelwandig en lekvrij, dus je koffie blijft warm onderweg. Met tulpen van oude botanische prenten.",
     prijs: euro(14.95),
     img: "/cadeaus/thermofles-tulpen.jpg",
+    giftId: "thermofles-tulpen",
     alt: "Thermofles met tulpenprint",
   },
   {
@@ -124,6 +134,7 @@ const onderweg: Product[] = [
       "Van Goghs beroemde sterrenhemel om mee te nemen. Net zo mooi op je bureau als in je tas.",
     prijs: euro(14.95),
     img: "/cadeaus/thermofles-sterrennacht.jpg",
+    giftId: "thermofles-sterrennacht",
     alt: "Thermofles met Sterrennacht-print",
   },
   {
@@ -132,6 +143,7 @@ const onderweg: Product[] = [
       "Strak wit met grote letters, voor wie z'n stad graag laat zien. Echt Rotterdams: geen poespas.",
     prijs: euro(14.95),
     img: "/cadeaus/thermofles-rotterdam.jpg",
+    giftId: "thermofles-rotterdam",
     alt: "Witte thermofles met Rotterdam-opdruk",
   },
   {
@@ -140,6 +152,7 @@ const onderweg: Product[] = [
       "Stevige katoenen tas met kunst erop: kies uit tulpen, de Sterrennacht, Amandelbloesem, Zonnebloemen of een Rotterdam-print.",
     prijs: euro(7.95),
     img: "/cadeaus/tote-bag-tulpen.jpg",
+    giftId: "tote-bag",
     alt: "Katoenen tote bag met tulpenprint",
   },
   {
@@ -148,6 +161,7 @@ const onderweg: Product[] = [
       "De Rotterdamse skyline met de Erasmusbrug, kubuswoningen en Euromast voor op de koelkast. Ook als sleutelhanger, vraag ernaar in de winkel.",
     prijs: `magneet ${euro(4.95)}`,
     img: "/cadeaus/magneet-skyline.jpg",
+    giftId: "magneet-rotterdam",
     alt: "Magneet met de skyline van Rotterdam",
   },
 ];
@@ -159,6 +173,7 @@ const blikken: Product[] = [
       "Echte Goudse stroopwafels in een Rotterdams bewaarblik. Als de wafels op zijn, is het blik nog lang niet klaar.",
     prijs: euro(6.95),
     img: "/cadeaus/stroopwafels-blik.jpg",
+    giftId: "stroopwafels-blik",
     alt: "Stroopwafels in Rotterdams blik",
   },
   {
@@ -167,6 +182,7 @@ const blikken: Product[] = [
       "Klassiek Nederlands speculaas in een Delfts blauw blik met molen. Er zijn ook varianten met tulpen, vraag welke er in het schap staan.",
     prijs: euro(11.95),
     img: "/cadeaus/speculaas-blik.jpg",
+    giftId: "speculaas-blik",
     alt: "Speculaas in Delfts blauw blik",
   },
   {
@@ -179,56 +195,12 @@ const blikken: Product[] = [
   },
 ];
 
-/** Honing & bijenwas van de imker: naam, korte omschrijving, prijs. */
-const honingGroepen: Array<{
-  titel: string;
-  sub?: string;
-  items: Array<[string, string, string]>;
-}> = [
-  {
-    titel: "Honing",
-    sub: "alle potten 250 gram",
-    items: [
-      ["Bloemen crèmehoning", "Nederlands, romig en smeerbaar", "€7,95"],
-      ["Fruithoning", "Nederlands, zacht en fruitig", "€7,95"],
-      ["Lindehoning", "Nederlands, fris en bloemig", "€7,95"],
-      ["Biesboschhoning", "uit de regio", "€6,95"],
-      ["Acaciahoning", "vloeibaar en mild", "€8,45"],
-      ["Kastanjehoning", "donker en licht bitter, heerlijk bij koffie", "€8,45"],
-      ["Oranjebloesemhoning", "zoet en aromatisch", "€7,45"],
-    ],
-  },
-  {
-    titel: "Koek & snoep",
-    items: [
-      ["Honingkoek", "500 gram, voorgesneden", "€4,45"],
-      ["Honingkoek met kandij", "500 gram", "€6,95"],
-      ["Honingwafels", "6 stuks", "€4,45"],
-      ["Gemengde honingsnoep", "120 gram, drie smaken", "€3,45"],
-      ["Melk & honing snoepjes", "100 gram, romig gevuld", "€3,45"],
-      ["Duindoorn honingsnoep", "100 gram, met vitamine C", "€3,45"],
-      ["Honinglolly's", "8 stuks", "€4,45"],
-      ["Honingdrop", "150 gram, gemengd", "€4,45"],
-    ],
-  },
-  {
-    titel: "Kaarsen",
-    sub: "van pure bijenwas",
-    items: [
-      ["Bijenkorfkaars", "klassieke korfvorm", "€6,95"],
-      ["Bijenkorfkaars groot", "met bijtjes", "€12,95"],
-      ["Koninginnebij", "kaars in bijenvorm", "€4,45"],
-      ["Piramidekaars", "met bij", "€5,45"],
-      ["Stompkaars", "touwstructuur en bijtjes", "€6,45"],
-      ["Bolkaars", "touwstructuur en bijtjes", "€9,95"],
-      ["Raatkaars groot", "gegoten honingraat", "€9,95"],
-      ["Dinerkaarsen", "2 stuks, gerold", "€7,45"],
-      ["Waxinelichtjes hartje", "6 stuks", "€6,95"],
-      ["Waxinelichtjes", "18 stuks, zuivere bijenwas", "€19,95"],
-      ["Kerstboomkaarsjes", "20 stuks", "€19,95"],
-    ],
-  },
-];
+/** Honing & bijenwas: groepen uit de bestelcatalogus in lib/products. */
+const honingGroepen = [
+  { titel: "Honing", sub: "alle potten 250 gram", categorie: "Honing" },
+  { titel: "Koek & snoep", sub: undefined as string | undefined, categorie: "Koek & snoep" },
+  { titel: "Kaarsen", sub: "van pure bijenwas", categorie: "Kaarsen" },
+].map((g) => ({ ...g, items: GIFTS.filter((x) => x.categorie === g.categorie) }));
 
 /** Alle cadeaus en accessoires als secties voor de webshoppagina. */
 export default function CadeausSecties() {
@@ -246,8 +218,8 @@ export default function CadeausSecties() {
           <Squiggle className="w-28 text-clay-400 mb-6" />
           <p className="text-espresso-500 leading-relaxed max-w-lg">
             Alles wat we naast de koffie in de winkel hebben staan, met
-            dezelfde prijzen als op het bord. Verkrijgbaar aan de Bergselaan,
-            en cadeautjes pakken we mooi voor je in.
+            dezelfde prijzen als op het bord. Bestel online of kom langs aan
+            de Bergselaan; cadeautjes pakken we mooi voor je in.
           </p>
         </div>
       </section>
@@ -321,20 +293,23 @@ export default function CadeausSecties() {
                     <p className="text-xs text-espresso-400 mb-4">{g.sub}</p>
                   )}
                   <ul className={g.sub ? "" : "mt-4"}>
-                    {g.items.map(([naam, sub, prijs], i) => (
+                    {g.items.map((item, i) => (
                       <li
-                        key={naam}
-                        className={`py-2.5 ${i > 0 ? "border-t border-espresso-900/6" : ""}`}
+                        key={item.id}
+                        className={`py-2.5 flex items-center gap-3 ${i > 0 ? "border-t border-espresso-900/6" : ""}`}
                       >
-                        <div className="flex items-baseline justify-between gap-4 text-sm">
-                          <span className="text-espresso-700 font-medium">{naam}</span>
-                          <span className="font-semibold text-espresso-900 tabular-nums whitespace-nowrap">
-                            {prijs}
-                          </span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline justify-between gap-4 text-sm">
+                            <span className="text-espresso-700 font-medium">{item.naam}</span>
+                            <span className="font-semibold text-espresso-900 tabular-nums whitespace-nowrap">
+                              €{(item.prijs ?? 0).toFixed(2).replace(".", ",")}
+                            </span>
+                          </div>
+                          {item.sub && (
+                            <p className="text-xs text-espresso-400 mt-0.5">{item.sub}</p>
+                          )}
                         </div>
-                        {sub && (
-                          <p className="text-xs text-espresso-400 mt-0.5">{sub}</p>
-                        )}
+                        <GiftKoopKnop id={item.id} compact />
                       </li>
                     ))}
                   </ul>
@@ -402,7 +377,12 @@ function ProductSectie({
           <p className="text-sm text-espresso-500 leading-relaxed">{intro}</p>
         </Reveal>
 
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label={titel}
+          className="flex gap-4 overflow-x-auto snap-x snap-proximity scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 focus-visible:outline-2 focus-visible:outline-sage-500"
+        >
           {producten.map((p, i) => (
             <div key={p.naam} className="snap-center snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
               <div
@@ -417,6 +397,7 @@ function ProductSectie({
                       alt={p.alt ?? p.naam}
                       width={960}
                       height={1200}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 72vw"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                     {p.badge && (
@@ -439,6 +420,7 @@ function ProductSectie({
                       {p.prijs}
                     </span>
                   </p>
+                  {p.giftId && <GiftKoopKnop id={p.giftId} />}
                 </div>
               </div>
             </div>

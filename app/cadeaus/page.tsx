@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
-/** De cadeaus staan sinds de samenvoeging op de webshoppagina. */
+/** De cadeaus staan sinds de samenvoeging definitief op de webshoppagina. */
 export default function CadeausRedirect() {
-  redirect("/assortiment#cadeaus");
+  permanentRedirect("/assortiment#cadeaus");
 }

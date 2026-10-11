@@ -32,6 +32,12 @@ export async function generateMetadata({
   return {
     title: coffee.name,
     description: `${coffee.name}: ${coffee.notes.join(", ")}. ${coffee.description}`,
+    alternates: { canonical: `/assortiment/${coffee.slug}` },
+    openGraph: {
+      title: `${coffee.name} · Coffee Garden Rotterdam`,
+      description: `${coffee.notes.join(", ")} · 500 gram · €${BAG_PRICE},-`,
+      images: [{ url: coffee.image, width: 1200, height: 1500 }],
+    },
   };
 }
 
@@ -58,8 +64,29 @@ export default async function CoffeeDetailPage({
     ["Inhoud", "500 gram"],
   ];
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: coffee.name,
+    description: coffee.description,
+    image: `https://www.coffeegarden.nl${coffee.image}`,
+    brand: { "@type": "Brand", name: "Coffee Garden" },
+    offers: {
+      "@type": "Offer",
+      price: BAG_PRICE.toFixed(2),
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+      url: `https://www.coffeegarden.nl/assortiment/${coffee.slug}`,
+      seller: { "@id": "https://www.coffeegarden.nl/#winkel" },
+    },
+  };
+
   return (
     <div className="grain bg-paper-100">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-32 md:pt-40 pb-24">
         {/* Breadcrumb */}
         <Link
@@ -79,6 +106,7 @@ export default async function CoffeeDetailPage({
                 alt={coffee.name}
                 width={1200}
                 height={1500}
+                sizes="(min-width: 768px) 50vw, 100vw"
                 className="w-full h-auto object-cover"
                 priority
               />
@@ -221,6 +249,7 @@ export default async function CoffeeDetailPage({
                       src={c.thumb}
                       alt={c.name}
                       width={200}
+                      sizes="80px"
                       height={200}
                       className="w-20 h-20 rounded-2xl object-cover bg-paper-200 shrink-0"
                     />

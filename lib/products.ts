@@ -56,6 +56,200 @@ export const GRINDS = [
 ] as const;
 export type Grind = (typeof GRINDS)[number];
 
+/* ── Cadeaus & accessoires: bestelbare catalogus ───────────────────
+   Dit is de prijswaarheid voor alle niet-koffieproducten. De teksten
+   en foto's staan in components/shop/CadeausSecties.tsx; bestellen en
+   afrekenen rekenen uitsluitend met deze tabel. */
+
+export interface GiftVariant {
+  id: string;
+  label: string;
+  prijs: number;
+}
+
+export interface Gift {
+  id: string;
+  naam: string;
+  categorie: string;
+  /** Vaste prijs; ontbreekt wanneer er varianten zijn. */
+  prijs?: number;
+  varianten?: GiftVariant[];
+  /** Korte toelichting voor lijstweergave (honing, koek, kaarsen). */
+  sub?: string;
+  /** True: niet te verzenden, alleen af te halen in de winkel. */
+  afhalenAlleen?: boolean;
+}
+
+export const GIFTS: Gift[] = [
+  // Chai
+  { id: "chai-tiger", naam: "Tiger Spice Chai", categorie: "Chai", prijs: 14.95 },
+  { id: "chai-tortoise", naam: "Tortoise Green Tea Chai", categorie: "Chai", prijs: 14.95 },
+  { id: "chai-flamingo", naam: "Flamingo Vanilla Chai (decaf)", categorie: "Chai", prijs: 14.95 },
+
+  // Delfts blauw
+  {
+    id: "delfts-vaas", naam: "Delfts blauwe vaas", categorie: "Delfts blauw",
+    varianten: [
+      { id: "klein", label: "Klein", prijs: 12.95 },
+      { id: "groot", label: "Groot", prijs: 17.95 },
+    ],
+  },
+  {
+    id: "delfts-mok", naam: "Delfts blauwe mok met gouden oor", categorie: "Delfts blauw",
+    varianten: [
+      { id: "klein", label: "Klein", prijs: 6.95 },
+      { id: "groot", label: "Groot", prijs: 10.95 },
+    ],
+  },
+  { id: "delfts-kom", naam: "Delfts blauwe kom", categorie: "Delfts blauw", prijs: 10.95 },
+  { id: "delfts-peper-zout", naam: "Delfts blauw peper- & zoutstel", categorie: "Delfts blauw", prijs: 11.95 },
+
+  // Tulpen-servies
+  {
+    id: "tulpen-mok", naam: "Tulpenmok met gouden oor", categorie: "Tulpen-servies",
+    varianten: [
+      { id: "klein", label: "Klein", prijs: 6.95 },
+      { id: "groot", label: "Groot", prijs: 10.95 },
+    ],
+  },
+  { id: "tulpen-shotglas", naam: "Tulpen-shotglaasje", categorie: "Tulpen-servies", prijs: 3.95 },
+  { id: "tulpen-onderzetters", naam: "Tulpen-onderzetters (set van 6)", categorie: "Tulpen-servies", prijs: 4.95 },
+
+  // Voor onderweg
+  { id: "thermofles-tulpen", naam: "Thermofles Tulpen", categorie: "Voor onderweg", prijs: 14.95 },
+  { id: "thermofles-sterrennacht", naam: "Thermofles Sterrennacht", categorie: "Voor onderweg", prijs: 14.95 },
+  { id: "thermofles-rotterdam", naam: "Thermofles Rotterdam", categorie: "Voor onderweg", prijs: 14.95 },
+  {
+    id: "tote-bag", naam: "Tote bag", categorie: "Voor onderweg",
+    varianten: [
+      { id: "tulpen", label: "Tulpen", prijs: 7.95 },
+      { id: "sterrennacht", label: "Sterrennacht", prijs: 7.95 },
+      { id: "amandelbloesem", label: "Amandelbloesem", prijs: 7.95 },
+      { id: "zonnebloemen", label: "Zonnebloemen", prijs: 7.95 },
+      { id: "rotterdam", label: "Rotterdam", prijs: 7.95 },
+    ],
+  },
+  { id: "magneet-rotterdam", naam: "Magneet Rotterdam", categorie: "Voor onderweg", prijs: 4.95 },
+
+  // Blikken
+  { id: "stroopwafels-blik", naam: "Stroopwafels in blik", categorie: "Blikken", prijs: 6.95 },
+  { id: "speculaas-blik", naam: "Speculaas in blik", categorie: "Blikken", prijs: 11.95 },
+
+  // Honing (alleen afhalen)
+  { id: "honing-bloemen-creme", naam: "Bloemen crèmehoning", categorie: "Honing", sub: "Nederlands, romig en smeerbaar", prijs: 7.95, afhalenAlleen: true },
+  { id: "honing-fruit", naam: "Fruithoning", categorie: "Honing", sub: "Nederlands, zacht en fruitig", prijs: 7.95, afhalenAlleen: true },
+  { id: "honing-linde", naam: "Lindehoning", categorie: "Honing", sub: "Nederlands, fris en bloemig", prijs: 7.95, afhalenAlleen: true },
+  { id: "honing-biesbosch", naam: "Biesboschhoning", categorie: "Honing", sub: "uit de regio", prijs: 6.95, afhalenAlleen: true },
+  { id: "honing-acacia", naam: "Acaciahoning", categorie: "Honing", sub: "vloeibaar en mild", prijs: 8.45, afhalenAlleen: true },
+  { id: "honing-kastanje", naam: "Kastanjehoning", categorie: "Honing", sub: "donker en licht bitter, heerlijk bij koffie", prijs: 8.45, afhalenAlleen: true },
+  { id: "honing-oranjebloesem", naam: "Oranjebloesemhoning", categorie: "Honing", sub: "zoet en aromatisch", prijs: 7.45, afhalenAlleen: true },
+
+  // Koek & snoep (alleen afhalen)
+  { id: "honingkoek", naam: "Honingkoek", categorie: "Koek & snoep", sub: "500 gram, voorgesneden", prijs: 4.45, afhalenAlleen: true },
+  { id: "honingkoek-kandij", naam: "Honingkoek met kandij", categorie: "Koek & snoep", sub: "500 gram", prijs: 6.95, afhalenAlleen: true },
+  { id: "honingwafels", naam: "Honingwafels", categorie: "Koek & snoep", sub: "6 stuks", prijs: 4.45, afhalenAlleen: true },
+  { id: "honingsnoep-gemengd", naam: "Gemengde honingsnoep", categorie: "Koek & snoep", sub: "120 gram, drie smaken", prijs: 3.45, afhalenAlleen: true },
+  { id: "honingsnoep-melk", naam: "Melk & honing snoepjes", categorie: "Koek & snoep", sub: "100 gram, romig gevuld", prijs: 3.45, afhalenAlleen: true },
+  { id: "honingsnoep-duindoorn", naam: "Duindoorn honingsnoep", categorie: "Koek & snoep", sub: "100 gram, met vitamine C", prijs: 3.45, afhalenAlleen: true },
+  { id: "honinglollys", naam: "Honinglolly's", categorie: "Koek & snoep", sub: "8 stuks", prijs: 4.45, afhalenAlleen: true },
+  { id: "honingdrop", naam: "Honingdrop", categorie: "Koek & snoep", sub: "150 gram, gemengd", prijs: 4.45, afhalenAlleen: true },
+
+  // Kaarsen (alleen afhalen)
+  { id: "kaars-bijenkorf", naam: "Bijenkorfkaars", categorie: "Kaarsen", sub: "klassieke korfvorm", prijs: 6.95, afhalenAlleen: true },
+  { id: "kaars-bijenkorf-groot", naam: "Bijenkorfkaars groot", categorie: "Kaarsen", sub: "met bijtjes", prijs: 12.95, afhalenAlleen: true },
+  { id: "kaars-koninginnebij", naam: "Koninginnebij", categorie: "Kaarsen", sub: "kaars in bijenvorm", prijs: 4.45, afhalenAlleen: true },
+  { id: "kaars-piramide", naam: "Piramidekaars", categorie: "Kaarsen", sub: "met bij", prijs: 5.45, afhalenAlleen: true },
+  { id: "kaars-stomp", naam: "Stompkaars", categorie: "Kaarsen", sub: "touwstructuur en bijtjes", prijs: 6.45, afhalenAlleen: true },
+  { id: "kaars-bol", naam: "Bolkaars", categorie: "Kaarsen", sub: "touwstructuur en bijtjes", prijs: 9.95, afhalenAlleen: true },
+  { id: "kaars-raat", naam: "Raatkaars groot", categorie: "Kaarsen", sub: "gegoten honingraat", prijs: 9.95, afhalenAlleen: true },
+  { id: "kaars-diner", naam: "Dinerkaarsen", categorie: "Kaarsen", sub: "2 stuks, gerold", prijs: 7.45, afhalenAlleen: true },
+  { id: "waxine-hartje", naam: "Waxinelichtjes hartje", categorie: "Kaarsen", sub: "6 stuks", prijs: 6.95, afhalenAlleen: true },
+  { id: "waxine", naam: "Waxinelichtjes", categorie: "Kaarsen", sub: "18 stuks, zuivere bijenwas", prijs: 19.95, afhalenAlleen: true },
+  { id: "kaars-kerstboom", naam: "Kerstboomkaarsjes", categorie: "Kaarsen", sub: "20 stuks", prijs: 19.95, afhalenAlleen: true },
+];
+
+export function getGift(id: string): Gift | undefined {
+  return GIFTS.find((g) => g.id === id);
+}
+
+/** Prijs van een cadeau, met variant waar van toepassing. */
+export function giftPrijs(gift: Gift, variantId?: string): number | undefined {
+  if (gift.varianten) {
+    return gift.varianten.find((v) => v.id === variantId)?.prijs;
+  }
+  return gift.prijs;
+}
+
+/* ── Winkelwagenregels en totalen (gedeeld door site en API) ─────── */
+
+export type CartLine =
+  | { soort: "koffie"; slug: string; grind: Grind; qty: number }
+  | { soort: "cadeau"; id: string; variant?: string; qty: number };
+
+export interface OrderTotalen {
+  zakken: number;
+  koffieLos: number;
+  koffieAfhalen: number;
+  cadeaus: number;
+  bevatAfhalenAlleen: boolean;
+  /** Totaal bij afhalen (koffie met bundelvoordeel + cadeaus). */
+  afhalen: number;
+  /** Totaal bij verzenden, of null wanneer verzenden niet kan. */
+  verzenden: number | null;
+}
+
+/** Rekent alle totalen uit; geeft null bij een ongeldige regel. */
+export function berekenTotalen(lines: CartLine[]): OrderTotalen | null {
+  let zakken = 0;
+  let cadeaus = 0;
+  let bevatAfhalenAlleen = false;
+  for (const line of lines) {
+    if (!Number.isInteger(line.qty) || line.qty < 1 || line.qty > 30) return null;
+    if (line.soort === "koffie") {
+      if (!getCoffeeBySlug(line.slug) || !GRINDS.includes(line.grind)) return null;
+      zakken += line.qty;
+    } else {
+      const gift = getGift(line.id);
+      if (!gift) return null;
+      const prijs = giftPrijs(gift, line.variant);
+      if (prijs === undefined) return null;
+      cadeaus += prijs * line.qty;
+      if (gift.afhalenAlleen) bevatAfhalenAlleen = true;
+    }
+  }
+  const koffieLos = zakken * BAG_PRICE;
+  const koffieAfhalen = pickupTotal(zakken);
+  const afhalen = koffieAfhalen + cadeaus;
+  const verzenden = bevatAfhalenAlleen
+    ? null
+    : koffieLos + cadeaus + (lines.length > 0 ? SHIPPING_COST : 0);
+  return { zakken, koffieLos, koffieAfhalen, cadeaus, bevatAfhalenAlleen, afhalen, verzenden };
+}
+
+/* ── Weergavehelpers (gedeeld door drawer, afrekenen en secties) ──── */
+
+/** Prijsweergave in huisstijl: hele euro's als €15,-, anders €8,45. */
+export function euro(n: number): string {
+  const centen = Math.round(n * 100);
+  if (centen % 100 === 0) return `€${centen / 100},-`;
+  return `€${(centen / 100).toFixed(2).replace(".", ",")}`;
+}
+
+/** Cadeaus met een eigen productfoto in public/cadeaus/. */
+const CADEAU_FOTOS = new Set([
+  "chai-tiger", "chai-tortoise", "chai-flamingo", "delfts-vaas", "delfts-mok",
+  "delfts-kom", "delfts-peper-zout", "tulpen-mok", "tulpen-shotglas",
+  "tulpen-onderzetters", "thermofles-tulpen", "thermofles-sterrennacht",
+  "thermofles-rotterdam", "stroopwafels-blik", "speculaas-blik",
+]);
+
+/** Pad naar de cadeaufoto, of null wanneer er (nog) geen foto is. */
+export function giftThumb(id: string): string | null {
+  if (id === "tote-bag") return "/cadeaus/tote-bag-tulpen.jpg";
+  if (id === "magneet-rotterdam") return "/cadeaus/magneet-skyline.jpg";
+  return CADEAU_FOTOS.has(id) ? `/cadeaus/${id}.jpg` : null;
+}
+
 /**
  * Totaalprijs bij afhalen: goedkoopste combinatie van staffels
  * (bv. 4 zakken = 3 + 1 = €38 + €15 = €53).
@@ -296,7 +490,7 @@ const ALLE_KOFFIES: Coffee[] = [
     roast: "dark",
     beans: "Arabica · Robusta",
     description:
-      "Fluwelig is het woord. Donkere cacao, een lichte zoetheid van zoethout en pruim, en een romige mondgevoel die blijft hangen. Onze meest sensuele espresso.",
+      "Fluwelig is het woord. Donkere cacao, een lichte zoetheid van zoethout en pruim, en een romig mondgevoel dat blijft hangen. Onze meest sensuele espresso.",
     brewing: "Espresso met dichte crema, ook prachtig in een macchiato.",
     image: "/products/velours.png",
     thumb: "/products/velours-thumb.png",
@@ -339,7 +533,7 @@ const ALLE_KOFFIES: Coffee[] = [
     roast: "dark",
     beans: "Arabica · Robusta",
     description:
-      "Onze meest uitgesproken blend. Donker fruit, een spannende vleugje zwarte peper en een pure espresso-finish. Voor wie van het stoere werk houdt, geen halfzachte koffie hier.",
+      "Onze meest uitgesproken blend. Donker fruit, een spannend vleugje zwarte peper en een pure espresso-finish. Voor wie van het stoere werk houdt, geen halfzachte koffie hier.",
     brewing: "Pure espresso of ristretto, geen melk nodig.",
     image: "/products/bellissimo-bag.jpg",
     thumb: "/products/bellissimo-bag-thumb.jpg",

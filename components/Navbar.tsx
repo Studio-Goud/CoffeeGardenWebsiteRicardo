@@ -18,7 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { bagCount, openDrawer } = useCart();
+  const { bagCount, hydrated, openDrawer } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -76,7 +76,7 @@ export default function Navbar() {
             className="relative w-10 h-10 rounded-full flex items-center justify-center text-espresso-700 hover:text-sage-700 hover:bg-sage-100 transition-colors"
           >
             <BagIcon className="w-5 h-5" />
-            {bagCount > 0 && (
+            {hydrated && bagCount > 0 && (
               <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-sage-700 text-paper-100 text-[10px] font-semibold flex items-center justify-center tabular-nums">
                 {bagCount}
               </span>
@@ -100,7 +100,7 @@ export default function Navbar() {
             className="relative w-10 h-10 rounded-full flex items-center justify-center text-espresso-700"
           >
             <BagIcon className="w-5 h-5" />
-            {bagCount > 0 && (
+            {hydrated && bagCount > 0 && (
               <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 px-1 rounded-full bg-sage-700 text-paper-100 text-[10px] font-semibold flex items-center justify-center tabular-nums">
                 {bagCount}
               </span>
@@ -122,6 +122,7 @@ export default function Navbar() {
 
       {/* Mobiel menu */}
       <div
+        inert={!open || undefined}
         className={`md:hidden overflow-hidden transition-all duration-400 ${
           open ? "max-h-72 border-t border-espresso-900/8" : "max-h-0"
         }`}

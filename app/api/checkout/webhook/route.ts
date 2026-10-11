@@ -24,12 +24,15 @@ interface MolliePayment {
     bezorging?: string;
     bestelling?: string;
     opmerking?: string;
+    /** Gezet zodra de bestelmail is verstuurd, tegen dubbele mails. */
+    mailVerstuurd?: boolean;
   };
 }
 
-async function stuurBestelmail(p: MolliePayment) {
+/** Geeft true terug wanneer de mail verstuurd is (of mailen uit staat). */
+async function stuurBestelmail(p: MolliePayment): Promise<boolean> {
   const resendKey = process.env.RESEND_API_KEY;
-  if (!resendKey) return;
+  if (!resendKey) return true;
 
   const naar = process.env.ORDER_MAIL_TO ?? "info@coffeegarden.nl";
   const van = process.env.ORDER_MAIL_FROM ?? "onboarding@resend.dev";
@@ -71,6 +74,24 @@ async function stuurBestelmail(p: MolliePayment) {
   });
   if (!res.ok) {
     console.error("Bestelmail versturen mislukt:", res.status, await res.text());
+    return false;
+  }
+  return true;
+}
+
+/** Markeert in Mollie dat de bestelmail verstuurd is (idempotentie). */
+async function markeerVerstuurd(p: MolliePayment, apiKey: string) {
+  try {
+    await fetch(`https://api.mollie.com/v2/payments/${p.id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ metadata: { ...(p.metadata ?? {}), mailVerstuurd: true } }),
+    });
+  } catch (e) {
+    console.error("Betaling markeren als gemaild mislukt:", e);
   }
 }
 
@@ -93,19 +114,26 @@ export async function POST(req: Request) {
     const res = await fetch(`https://api.mollie.com/v2/payments/${id}`, {
       headers: { Authorization: `Bearer ${apiKey}` },
     });
-    if (res.ok) {
-      const p: MolliePayment = await res.json();
-      console.log(
-        `Mollie ${id}: ${p.status} | ${p.amount?.value} ${p.amount?.currency} | ${p.metadata?.naam ?? ""} | ${p.metadata?.bestelling ?? ""}`,
-      );
-      if (p.status === "paid") {
-        await stuurBestelmail(p);
+    if (!res.ok) {
+      // Tijdelijke Mollie-storing: 503 zodat Mollie het later opnieuw probeert
+      return new NextResponse(null, { status: res.status >= 500 ? 503 : 200 });
+    }
+    const p: MolliePayment = await res.json();
+    console.log(
+      `Mollie ${id}: ${p.status} | ${p.amount?.value} ${p.amount?.currency} | ${p.metadata?.naam ?? ""} | ${p.metadata?.bestelling ?? ""}`,
+    );
+    if (p.status === "paid" && !p.metadata?.mailVerstuurd) {
+      const gelukt = await stuurBestelmail(p);
+      if (!gelukt) {
+        // Mail mislukt: niet markeren en 503 geven, dan herhaalt Mollie
+        return new NextResponse(null, { status: 503 });
       }
+      await markeerVerstuurd(p, apiKey);
     }
   } catch (e) {
     console.error("Mollie-webhook verwerken mislukt:", e);
+    return new NextResponse(null, { status: 503 });
   }
 
-  // Altijd 200, anders blijft Mollie de webhook herhalen
   return new NextResponse(null, { status: 200 });
 }

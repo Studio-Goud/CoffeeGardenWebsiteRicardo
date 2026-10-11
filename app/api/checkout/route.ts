@@ -1,31 +1,24 @@
 import { NextResponse } from "next/server";
 import {
   getCoffeeBySlug,
-  pickupTotal,
-  shippingTotal,
+  getGift,
+  giftPrijs,
+  berekenTotalen,
   GRINDS,
   WEBSHOP_OPEN,
-  type Grind,
+  type CartLine,
 } from "@/lib/products";
 
 /**
- * Maakt een Mollie-betaling aan voor de winkelwagen en geeft de checkout-URL
- * terug. De totaalprijs wordt hier server-side berekend uit lib/products.ts,
- * zodat een aangepaste request nooit een ander bedrag kan afrekenen.
- *
- * Vereist MOLLIE_API_KEY als omgevingsvariabele (test_... of live_...).
- * Zonder sleutel geeft deze route 503 en valt de afrekenpagina terug op de
- * bestelling-per-e-mail.
+ * Maakt een Mollie-betaling aan voor de winkelwagen (koffie en cadeaus)
+ * en geeft de checkout-URL terug. Alle prijzen en totalen worden hier
+ * server-side berekend uit lib/products.ts, zodat een aangepaste
+ * request nooit een ander bedrag kan afrekenen. Producten die alleen
+ * af te halen zijn, blokkeren de verzendoptie ook aan deze kant.
  */
 
-interface CheckoutItem {
-  slug: string;
-  grind: Grind;
-  qty: number;
-}
-
 interface CheckoutBody {
-  items: CheckoutItem[];
+  lines: CartLine[];
   fulfilment: "afhalen" | "verzenden";
   naam: string;
   email: string;
@@ -37,6 +30,27 @@ interface CheckoutBody {
 }
 
 const SITE_URL = process.env.SITE_URL ?? "https://www.coffeegarden.nl";
+
+/** Vrije tekst ontdoen van regeleindes en control characters, zodat
+ *  niemand via naam of opmerking valse regels in de bestelmail zet. */
+function clean(s: unknown, max: number): string {
+  if (typeof s !== "string") return "";
+  return s.replace(/[\r\n\t\u0000-\u001f\u007f]/g, " ").trim().slice(0, max);
+}
+
+const EMAIL_RE = /^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]{2,}$/;
+
+function regelOmschrijving(line: CartLine): string | null {
+  if (line.soort === "koffie") {
+    const coffee = getCoffeeBySlug(line.slug);
+    if (!coffee || !GRINDS.includes(line.grind)) return null;
+    return `${line.qty}x ${coffee.name} (500 gr, ${line.grind})`;
+  }
+  const gift = getGift(line.id);
+  if (!gift || giftPrijs(gift, line.variant) === undefined) return null;
+  const variant = gift.varianten?.find((v) => v.id === line.variant)?.label;
+  return `${line.qty}x ${gift.naam}${variant ? ` (${variant})` : ""}`;
+}
 
 export async function POST(req: Request) {
   if (!WEBSHOP_OPEN) {
@@ -55,38 +69,61 @@ export async function POST(req: Request) {
   }
 
   if (
-    !Array.isArray(body.items) ||
-    body.items.length === 0 ||
-    body.items.length > 50 ||
+    !Array.isArray(body.lines) ||
+    body.lines.length === 0 ||
+    body.lines.length > 60 ||
     (body.fulfilment !== "afhalen" && body.fulfilment !== "verzenden") ||
     typeof body.naam !== "string" ||
     body.naam.trim() === "" ||
     typeof body.email !== "string" ||
-    !body.email.includes("@")
+    !EMAIL_RE.test(body.email.trim())
   ) {
     return NextResponse.json({ error: "invalid_order" }, { status: 400 });
   }
 
-  // Regels valideren en bedrag server-side berekenen
-  const regels: string[] = [];
-  let bagCount = 0;
-  for (const item of body.items) {
-    const coffee = getCoffeeBySlug(item.slug);
-    const qty = Number(item.qty);
-    if (
-      !coffee ||
-      !Number.isInteger(qty) ||
-      qty < 1 ||
-      qty > 30 ||
-      !GRINDS.includes(item.grind)
-    ) {
+  // Dubbele regels samenvoegen (de site doet dit al, directe API-calls niet)
+  const samengevoegd = new Map<string, CartLine>();
+  for (const line of body.lines) {
+    if (!line || (line.soort !== "koffie" && line.soort !== "cadeau")) {
       return NextResponse.json({ error: "invalid_item" }, { status: 400 });
     }
-    bagCount += qty;
-    regels.push(`${qty}x ${coffee.name} (500 gr, ${item.grind})`);
+    const key =
+      line.soort === "koffie"
+        ? `koffie:${line.slug}:${line.grind}`
+        : `cadeau:${line.id}:${line.variant ?? ""}`;
+    const bestaand = samengevoegd.get(key);
+    if (bestaand) bestaand.qty += line.qty;
+    else samengevoegd.set(key, { ...line });
+  }
+  const lines = [...samengevoegd.values()];
+
+  // Regels valideren; bedragen rekent berekenTotalen server-side uit
+  const regels: string[] = [];
+  for (const line of lines) {
+    const omschrijving = regelOmschrijving(line);
+    if (omschrijving === null) {
+      return NextResponse.json({ error: "invalid_item" }, { status: 400 });
+    }
+    regels.push(omschrijving);
+  }
+
+  const totalen = berekenTotalen(lines);
+  if (totalen === null) {
+    return NextResponse.json({ error: "invalid_item" }, { status: 400 });
+  }
+
+  // De bestelling moet volledig in de Mollie-metadata (en dus in de
+  // bestelmail) passen: dat is de enige administratie van de winkel.
+  const artikelen = lines.reduce((n, l) => n + l.qty, 0);
+  const bestelling = regels.join(" | ");
+  if (artikelen > 60 || bestelling.length > 700) {
+    return NextResponse.json({ error: "order_too_large" }, { status: 400 });
   }
 
   const verzenden = body.fulfilment === "verzenden";
+  if (verzenden && totalen.verzenden === null) {
+    return NextResponse.json({ error: "pickup_only_items" }, { status: 400 });
+  }
   if (
     verzenden &&
     (!body.straat?.trim() || !body.postcode?.trim() || !body.plaats?.trim())
@@ -94,25 +131,35 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "missing_address" }, { status: 400 });
   }
 
-  const totaal = verzenden ? shippingTotal(bagCount) : pickupTotal(bagCount);
+  const totaal = verzenden ? (totalen.verzenden as number) : totalen.afhalen;
+  const onderdelen: string[] = [];
+  if (totalen.zakken > 0) {
+    onderdelen.push(`${totalen.zakken} ${totalen.zakken === 1 ? "zak" : "zakken"} koffie`);
+  }
+  const cadeauAantal = lines
+    .filter((l) => l.soort === "cadeau")
+    .reduce((n, l) => n + l.qty, 0);
+  if (cadeauAantal > 0) {
+    onderdelen.push(`${cadeauAantal} ${cadeauAantal === 1 ? "cadeau" : "cadeaus"}`);
+  }
 
   const payment = {
     amount: { currency: "EUR", value: totaal.toFixed(2) },
-    description: `Coffee Garden bestelling: ${bagCount} ${bagCount === 1 ? "zak" : "zakken"} koffie`,
+    description: `Coffee Garden bestelling: ${onderdelen.join(" en ")}`,
     redirectUrl: `${SITE_URL}/afrekenen/bedankt`,
     ...(SITE_URL.startsWith("https://")
       ? { webhookUrl: `${SITE_URL}/api/checkout/webhook` }
       : {}),
     locale: "nl_NL",
     metadata: {
-      naam: body.naam.slice(0, 100),
-      email: body.email.slice(0, 100),
-      telefoon: body.telefoon?.slice(0, 30) ?? "",
+      naam: clean(body.naam, 100),
+      email: body.email.trim().slice(0, 100),
+      telefoon: clean(body.telefoon, 30),
       bezorging: verzenden
-        ? `Verzenden: ${body.straat}, ${body.postcode} ${body.plaats}`.slice(0, 200)
+        ? `Verzenden: ${clean(body.straat, 100)}, ${clean(body.postcode, 10)} ${clean(body.plaats, 60)}`
         : "Afhalen in de winkel",
-      bestelling: regels.join(" | ").slice(0, 700),
-      opmerking: body.opmerking?.slice(0, 200) ?? "",
+      bestelling,
+      opmerking: clean(body.opmerking, 200),
     },
   };
 
@@ -138,5 +185,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "mollie_error" }, { status: 502 });
   }
 
-  return NextResponse.json({ checkoutUrl });
+  // Het betaal-id gaat mee zodat de bedankt-pagina de status kan checken
+  return NextResponse.json({ checkoutUrl, paymentId: data.id ?? null });
 }

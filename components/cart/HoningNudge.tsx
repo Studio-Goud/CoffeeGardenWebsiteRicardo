@@ -10,10 +10,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "./CartContext";
+import { getGift } from "@/lib/products";
 import { CloseIcon, SparkIcon } from "../Icons";
 
 export default function HoningNudge() {
-  const { bagCount, drawerOpen } = useCart();
+  const { items, bagCount, drawerOpen } = useCart();
+  const heeftAlHoning = items.some(
+    (l) => l.soort === "cadeau" && getGift(l.id)?.categorie === "Honing",
+  );
   const pathname = usePathname();
   const [zichtbaar, setZichtbaar] = useState(false);
   const [klaar, setKlaar] = useState(false);
@@ -27,13 +31,18 @@ export default function HoningNudge() {
   }, []);
 
   useEffect(() => {
-    if (klaar || bagCount === 0 || drawerOpen || pathname.startsWith("/afrekenen")) {
+    // Alleen op winkelpagina's: niet op info-pagina's of bij het afrekenen
+    const winkelt =
+      pathname === "/" ||
+      pathname === "/assortiment" ||
+      pathname.startsWith("/assortiment/");
+    if (klaar || heeftAlHoning || bagCount === 0 || drawerOpen || !winkelt) {
       setZichtbaar(false);
       return;
     }
     const timer = setTimeout(() => setZichtbaar(true), 1200);
     return () => clearTimeout(timer);
-  }, [klaar, bagCount, drawerOpen, pathname]);
+  }, [klaar, heeftAlHoning, bagCount, drawerOpen, pathname]);
 
   function sluit() {
     setKlaar(true);
@@ -47,7 +56,11 @@ export default function HoningNudge() {
   if (!zichtbaar) return null;
 
   return (
-    <div className="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:bottom-6 z-50 sm:max-w-sm animate-nudge-in">
+    <div
+      role="status"
+      aria-label="Tip: honing bij je koffie"
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] inset-x-4 sm:inset-x-auto sm:right-6 sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-50 sm:max-w-sm animate-nudge-in"
+    >
       <div className="relative rounded-3xl bg-paper-50 border border-sage-200 shadow-2xl shadow-espresso-900/15 p-5 pr-12 -rotate-[0.6deg]">
         <span className="absolute -top-3 left-5 px-3 py-1 bg-clay-500 text-paper-50 text-[10px] font-semibold uppercase tracking-wider rounded-full -rotate-[3deg] shadow-md shadow-clay-600/30">
           psst...
@@ -55,7 +68,7 @@ export default function HoningNudge() {
         <button
           onClick={sluit}
           aria-label="Melding sluiten"
-          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-espresso-400 hover:bg-sage-100 hover:text-espresso-700 transition-colors"
+          className="absolute top-1.5 right-1.5 w-11 h-11 rounded-full flex items-center justify-center text-espresso-400 hover:bg-sage-100 hover:text-espresso-700 transition-colors"
         >
           <CloseIcon className="w-4 h-4" />
         </button>

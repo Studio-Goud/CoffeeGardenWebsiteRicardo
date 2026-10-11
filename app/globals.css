@@ -23,7 +23,7 @@
   --color-paper-400: #d8cfba;
 
   --color-espresso-300: #b5a794;
-  --color-espresso-400: #8a7a64;
+  --color-espresso-400: #7a6c58; /* 4,81:1 op paper-100 (WCAG AA voor kleine tekst) */
   --color-espresso-500: #5f5343;
   --color-espresso-600: #463d31;
   --color-espresso-700: #322b22;

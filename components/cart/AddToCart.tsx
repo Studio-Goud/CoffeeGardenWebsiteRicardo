@@ -7,7 +7,7 @@ import { GRINDS, type Grind } from "@/lib/products";
 
 /** Maalwijze + aantal + "In winkelwagen" — het hart van de bestelfunnel. */
 export default function AddToCart({ slug }: { slug: string }) {
-  const { addItem } = useCart();
+  const { addKoffie } = useCart();
   const [grind, setGrind] = useState<Grind>("Hele bonen");
   const [qty, setQtyState] = useState(1);
 
@@ -17,12 +17,13 @@ export default function AddToCart({ slug }: { slug: string }) {
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-espresso-400 mb-3">
           Maalwijze
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Maalwijze">
           {GRINDS.map((g) => (
             <button
               key={g}
               onClick={() => setGrind(g)}
-              className={`px-4 py-2 text-sm rounded-full border transition-colors ${
+              aria-pressed={grind === g}
+              className={`px-4 py-2 text-sm rounded-full border touch-manipulation transition-colors ${
                 grind === g
                   ? "bg-sage-700 border-sage-700 text-paper-100"
                   : "border-espresso-900/15 text-espresso-700 hover:border-sage-500 hover:text-sage-700"
@@ -55,7 +56,7 @@ export default function AddToCart({ slug }: { slug: string }) {
           </button>
         </div>
         <button
-          onClick={() => addItem(slug, grind, qty)}
+          onClick={() => addKoffie(slug, grind, qty)}
           className="group flex-1 inline-flex items-center justify-center gap-3 px-8 py-4 bg-sage-700 text-paper-100 font-medium rounded-full hover:bg-sage-800 transition-colors duration-300"
         >
           <BagIcon className="w-4.5 h-4.5" />

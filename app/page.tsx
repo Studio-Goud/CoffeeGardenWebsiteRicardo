@@ -46,7 +46,7 @@ const localProducts = [
   { name: "Granola van Leanne's Bakery", desc: "Rotterdams gebakken, in vier smaken: naturel, chocola, kokos en appel-kaneel", img: "/images/granola.jpg" },
   { name: "Stroopwafels in blik", desc: "Echte Goudse ambacht", img: "/stroopwafel.jpg" },
   { name: "Speculaas in blik", desc: "Klassiek Nederlands gebak in een Delfts blauw bewaarblik", img: "/images/speculaas-blik.jpg" },
-  { name: "Cocosbollen van Madame Cocos", desc: "Handgemaakt, romig en vers", img: "/Madame Cocos.png" },
+  { name: "Kokosbollen van Madame Cocos", desc: "Handgemaakt, romig en vers", img: "/Madame Cocos.png" },
   { name: "Delfts Blauw", desc: "Vazen, mokken, schaaltjes en meer: authentiek aardewerk als cadeau", img: "/images/delfts-blauw-vaas.jpg" },
   { name: "Bewaarblikken", desc: "Met Van Goghs amandelbloesem of Hollandse tulpen", img: "/images/bewaarblik.jpg" },
   { name: "Drinkflessen & tote bags", desc: "Met tulpen, Van Gogh-prints en Rotterdam-designs", img: "/images/drinkfles-tulpen.jpg" },
@@ -118,8 +118,9 @@ export default function HomePage() {
                   <Image
                     src="/images/interieur.jpg"
                     alt="Het interieur van Coffee Garden"
-                    width={400}
-                    height={480}
+                    width={512}
+                    height={614}
+                    sizes="(min-width: 768px) 256px, 160px"
                     className="w-full object-cover aspect-[5/6]"
                     priority
                   />
@@ -134,8 +135,9 @@ export default function HomePage() {
                   <Image
                     src="/images/matcha-moment.jpg"
                     alt="Iced matcha aan de plantenwand"
-                    width={400}
-                    height={480}
+                    width={512}
+                    height={614}
+                    sizes="(min-width: 768px) 256px, 160px"
                     className="w-full object-cover aspect-[5/6]"
                   />
                 </div>
@@ -157,10 +159,10 @@ export default function HomePage() {
                 <Image
                   src="/images/interieur.jpg"
                   alt="Het interieur van Coffee Garden"
-                  width={600}
-                  height={720}
+                  width={512}
+                  height={614}
+                  sizes="(min-width: 768px) 256px, 160px"
                   className="w-full object-cover aspect-[5/6]"
-                  priority
                 />
               </div>
               <figcaption className="pt-2.5 text-center text-sm font-display italic text-espresso-500">
@@ -173,8 +175,9 @@ export default function HomePage() {
                 <Image
                   src="/images/matcha-moment.jpg"
                   alt="Iced matcha aan de plantenwand"
-                  width={600}
-                  height={720}
+                  width={512}
+                  height={614}
+                  sizes="(min-width: 768px) 256px, 160px"
                   className="w-full object-cover aspect-[5/6]"
                 />
               </div>
@@ -269,6 +272,7 @@ export default function HomePage() {
                     src="/images/interieur.jpg"
                     alt="Het interieur van Coffee Garden: lichte houten tafels, planten en veel daglicht"
                     width={1303}
+                    sizes="(min-width: 768px) 448px, 90vw"
                     height={1600}
                     className="w-full h-full object-cover"
                   />
@@ -354,7 +358,7 @@ export default function HomePage() {
             </Link>
           </Reveal>
 
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-proximity scroll-pl-5 overscroll-x-contain no-scrollbar -mx-5 px-5 pb-2 sm:grid sm:gap-5 sm:overflow-visible sm:mx-0 sm:px-0 sm:pb-0 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((coffee, i) => (
               <div key={coffee.slug} className="snap-center snap-always shrink-0 w-[72%] sm:w-auto sm:shrink">
                 <Link
@@ -366,6 +370,7 @@ export default function HomePage() {
                       src={coffee.thumb}
                       alt={coffee.name}
                       width={800}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 72vw"
                       height={800}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
@@ -471,16 +476,17 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <Reveal className="mb-16 max-w-xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-sage-700 mb-4">
-              Alleen in de winkel
+              Uit het schap
             </p>
             <h2 className="font-display text-4xl md:text-5xl tracking-tight text-espresso-900 mb-5">
               Cadeaus &amp; <em className="display-italic text-sage-600">lekkers</em>
               <br />
-              uit de winkel
+              uit het schap
             </h2>
             <p className="text-espresso-500 text-sm leading-relaxed">
               Naast koffie en thee vind je bij ons lekkers van lokale makers en
-              leuke cadeaus: van Delfts blauw tot Rotterdam-souvenirs.
+              leuke cadeaus: van Delfts blauw tot Rotterdam-souvenirs. De
+              meeste cadeaus bestel je ook gewoon online.
             </p>
           </Reveal>
 
@@ -497,6 +503,7 @@ export default function HomePage() {
                       src={p.img}
                       alt={p.name}
                       width={600}
+                      sizes="(min-width: 640px) 25vw, 50vw"
                       height={600}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                     />
