@@ -8,6 +8,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCart } from "./CartContext";
 import { getGift } from "@/lib/products";
@@ -72,21 +73,33 @@ export default function HoningNudge() {
         >
           <CloseIcon className="w-4 h-4" />
         </button>
-        <p className="font-display text-lg text-espresso-900 mt-1 mb-1">
-          Honing bij je koffie?
-        </p>
-        <p className="text-sm text-espresso-500 leading-relaxed mb-3">
-          Vers van de imker: zeven soorten, vanaf €6,95. Zo meegepakt als je
-          je koffie komt ophalen.
-        </p>
-        <Link
-          href="/assortiment#honing"
-          onClick={sluit}
-          className="inline-flex items-center gap-2 text-sm font-medium text-sage-700 hover:text-sage-600 transition-colors"
-        >
-          <SparkIcon className="w-3.5 h-3.5 text-clay-400" />
-          Bekijk de honing
-        </Link>
+        <div className="flex gap-4 mt-1">
+          <Image
+            src="/cadeaus/honing-acacia.jpg"
+            alt="Pot acaciahoning van de imker"
+            width={128}
+            height={128}
+            sizes="64px"
+            className="w-16 h-16 rounded-2xl object-cover bg-paper-200 border border-sage-200 shrink-0 rotate-[2deg]"
+          />
+          <div>
+            <p className="font-display text-lg text-espresso-900 mb-1">
+              Honing bij je koffie?
+            </p>
+            <p className="text-sm text-espresso-500 leading-relaxed mb-3">
+              Vers van de imker: zeven soorten, vanaf €6,95. Zo meegepakt als
+              je je koffie komt ophalen.
+            </p>
+            <Link
+              href="/assortiment#honing"
+              onClick={sluit}
+              className="inline-flex items-center gap-2 text-sm font-medium text-sage-700 hover:text-sage-600 transition-colors"
+            >
+              <SparkIcon className="w-3.5 h-3.5 text-clay-400" />
+              Bekijk de honing
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Reveal from "@/components/Reveal";
 import { ArrowIcon, PinIcon, SparkIcon } from "@/components/Icons";
 import { Squiggle } from "@/components/Illustrations";
 import GiftKoopKnop from "@/components/cart/GiftKoopKnop";
-import { GIFTS, euro } from "@/lib/products";
+import { GIFTS, euro, giftThumb } from "@/lib/products";
 
 /** Productkaart met volledige foto, verhaaltje en prijs. */
 interface Product {
@@ -298,11 +298,21 @@ export default function CadeausSecties() {
                         key={item.id}
                         className={`py-2.5 flex items-center gap-3 ${i > 0 ? "border-t border-espresso-900/6" : ""}`}
                       >
+                        {giftThumb(item.id) && (
+                          <Image
+                            src={giftThumb(item.id)!}
+                            alt={item.naam}
+                            width={112}
+                            height={112}
+                            sizes="56px"
+                            className="w-14 h-14 rounded-xl object-cover bg-paper-200 border border-espresso-900/8 shrink-0"
+                          />
+                        )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-baseline justify-between gap-4 text-sm">
                             <span className="text-espresso-700 font-medium">{item.naam}</span>
                             <span className="font-semibold text-espresso-900 tabular-nums whitespace-nowrap">
-                              €{(item.prijs ?? 0).toFixed(2).replace(".", ",")}
+                              {euro(item.prijs ?? 0)}
                             </span>
                           </div>
                           {item.sub && (

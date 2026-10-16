@@ -241,6 +241,14 @@ const CADEAU_FOTOS = new Set([
   "delfts-kom", "delfts-peper-zout", "tulpen-mok", "tulpen-shotglas",
   "tulpen-onderzetters", "thermofles-tulpen", "thermofles-sterrennacht",
   "thermofles-rotterdam", "stroopwafels-blik", "speculaas-blik",
+  // Honing & bijenwas, vers van de imker
+  "honing-bloemen-creme", "honing-fruit", "honing-linde", "honing-biesbosch",
+  "honing-acacia", "honing-kastanje", "honing-oranjebloesem",
+  "honingkoek", "honingwafels", "honingsnoep-gemengd", "honingsnoep-melk",
+  "honingsnoep-duindoorn", "honinglollys", "honingdrop",
+  "kaars-bijenkorf", "kaars-bijenkorf-groot", "kaars-koninginnebij",
+  "kaars-piramide", "kaars-stomp", "kaars-bol", "kaars-raat", "kaars-diner",
+  "waxine-hartje", "waxine", "kaars-kerstboom",
 ]);
 
 /** Pad naar de cadeaufoto, of null wanneer er (nog) geen foto is. */
